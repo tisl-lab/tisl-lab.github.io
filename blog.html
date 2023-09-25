@@ -65,48 +65,20 @@ ul.task-list li input[type="checkbox"] {
 <script>
 
   window.document.addEventListener("DOMContentLoaded", function (_event) {
-    const listingTargetEl = window.document.querySelector('#listing-members .list');
+    const listingTargetEl = window.document.querySelector('#listing-listing .list');
     if (!listingTargetEl) {
       // No listing discovered, do not attach.
       return; 
     }
 
     const options = {
-      valueNames: ['listing-name','listing-website','listing-role','listing-advisors',{ data: ['index'] },{ data: ['categories'] }],
+      valueNames: ['listing-date','listing-title','listing-author','listing-image','listing-description','listing-categories',{ data: ['index'] },{ data: ['categories'] },{ data: ['listing-date-sort'] },{ data: ['listing-file-modified-sort'] }],
       
-      searchColumns: ["listing-name","listing-website","listing-role","listing-advisors"],
+      searchColumns: ["listing-date","listing-title","listing-author","listing-image","listing-description","listing-categories"],
     };
 
     window['quarto-listings'] = window['quarto-listings'] || {};
-    window['quarto-listings']['listing-members'] = new List('listing-members', options);
-
-    if (window['quarto-listing-loaded']) {
-      window['quarto-listing-loaded']();
-    }
-  });
-
-  window.addEventListener('hashchange',() => {
-    if (window['quarto-listing-loaded']) {
-      window['quarto-listing-loaded']();
-    }
-  })
-  
-
-  window.document.addEventListener("DOMContentLoaded", function (_event) {
-    const listingTargetEl = window.document.querySelector('#listing-alumni .list');
-    if (!listingTargetEl) {
-      // No listing discovered, do not attach.
-      return; 
-    }
-
-    const options = {
-      valueNames: ['listing-name','listing-website','listing-role',{ data: ['index'] },{ data: ['categories'] }],
-      
-      searchColumns: ["listing-name","listing-website","listing-role"],
-    };
-
-    window['quarto-listings'] = window['quarto-listings'] || {};
-    window['quarto-listings']['listing-alumni'] = new List('listing-alumni', options);
+    window['quarto-listings']['listing-listing'] = new List('listing-listing', options);
 
     if (window['quarto-listing-loaded']) {
       window['quarto-listing-loaded']();
@@ -144,7 +116,7 @@ ul.task-list li input[type="checkbox"] {
           <div class="collapse navbar-collapse" id="navbarCollapse">
             <ul class="navbar-nav navbar-nav-scroll ms-auto">
   <li class="nav-item">
-    <a class="nav-link active" href="./index.html" rel="" target="" aria-current="page"><i class="bi bi-house" role="img">
+    <a class="nav-link" href="./index.html" rel="" target=""><i class="bi bi-house" role="img">
 </i> 
  <span class="menu-text">Home</span></a>
   </li>  
@@ -154,7 +126,7 @@ ul.task-list li input[type="checkbox"] {
  <span class="menu-text">Publications</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="./blog.html" rel="" target=""><i class="bi bi-pen" role="img">
+    <a class="nav-link active" href="./blog.html" rel="" target="" aria-current="page"><i class="bi bi-pen" role="img">
 </i> 
  <span class="menu-text">Blog</span></a>
   </li>  
@@ -171,80 +143,106 @@ ul.task-list li input[type="checkbox"] {
 <!-- sidebar -->
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
-        <nav id="TOC" role="doc-toc" class="toc-active">
-    <h2 id="toc-title">On this page</h2>
-   
-  <ul>
-  <li><a href="#members" id="toc-members" class="nav-link active" data-scroll-target="#members">🧸 Members</a></li>
-  <li><a href="#code-of-conduct" id="toc-code-of-conduct" class="nav-link" data-scroll-target="#code-of-conduct">📜 Code of Conduct</a></li>
-  <li><a href="#funding" id="toc-funding" class="nav-link" data-scroll-target="#funding">💰 Funding</a></li>
-  <li><a href="#alumni" id="toc-alumni" class="nav-link" data-scroll-target="#alumni">🚀 Alumni</a></li>
-  </ul>
-</nav>
-    </div>
+        
+    <h5 class="quarto-listing-category-title">Categories</h5><div class="quarto-listing-category category-default"><div class="category" data-category="">All <span class="quarto-category-count">(2)</span></div><div class="category" data-category="Explainability">Explainability <span class="quarto-category-count">(1)</span></div><div class="category" data-category="Fairness">Fairness <span class="quarto-category-count">(2)</span></div><div class="category" data-category="Fairwashing">Fairwashing <span class="quarto-category-count">(1)</span></div><div class="category" data-category="Interpretability">Interpretability <span class="quarto-category-count">(1)</span></div><div class="category" data-category="Python">Python <span class="quarto-category-count">(1)</span></div></div></div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
 
 
-<p>The Trustworthy Information Systems Lab (TISL) tackles questions related to the design and deployment of trustworthy information and communication systems. Our research areas of interest are computer security, data privacy, optimization, and machine learning. Current research investigations of the group include data privacy and several aspects of trustworthy machine learning, such as fairness, privacy-preserving machine learning, and explainability.</p>
-<section id="members" class="level2">
-<h2 class="anchored" data-anchor-id="members">🧸 Members</h2>
-<div id="listing-members" class="quarto-listing quarto-listing-container-custom">
-  <a href="" target="_blank" rel="noopener">Dave-Harold Mbiazi-Njanda</a>, MSc Student
-    ☘️ co-supervision with 
-  <a href="https://scholar.google.com/citations?hl=en&amp;user=YYXb3KIAAAAJ" target="_blank" rel="noopener">Foutse Khomh</a>
-  <br>
-  <a href="" target="_blank" rel="noopener">Eliott Baltz</a>, MSc Student
-  <br>
-  <a href="" target="_blank" rel="noopener">Maryam Babaie</a>, PhD Student
-    ☘️ co-supervision with 
-  <a href="https://sebastiengambs.openum.ca/" target="_blank" rel="noopener">Sébastien Gambs</a>
-  <br>
-  <a href="https://meghanabhange.com/" target="_blank" rel="noopener">Meghana Bhange</a>, MSc Student
-    ☘️ co-supervision with 
-  <a href="https://scholar.google.fr/citations?user=6fcgU8QAAAAJ" target="_blank" rel="noopener">Jean-Marc Robert</a>
-  <br>
-  <a href="" target="_blank" rel="noopener">Patrik Kenfack</a>, PhD Student
-    ☘️ co-supervision with 
-  <a href="https://saebrahimi.github.io/" target="_blank" rel="noopener">Samira Ebrahimi Kahou</a>
-  <br>
-  <a href="https://aivodji.github.io/" target="_blank" rel="noopener">Ulrich Aïvodji</a>, Faculty
-  <br>
+
+
+
+
+<div class="quarto-listing quarto-listing-container-default" id="listing-listing">
+<div class="list quarto-listing-default">
+<div class="quarto-post image-right" data-index="0" data-categories="Python,Interpretability,Fairness" data-listing-date-sort="1616990400000" data-listing-file-modified-sort="1695490771393" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="11">
+<div class="thumbnail">
+<p><a href="./posts/2021-03-29-learning-fair-rulelists-with-faircorels/index.html"> <div class="listing-item-img-placeholder card-img-top" >&nbsp;</div> </a></p>
+</div>
+<div class="body">
+<a href="./posts/2021-03-29-learning-fair-rulelists-with-faircorels/index.html">
+<h3 class="no-anchor listing-title">
+Learning fair rule lists with FairCORELS
+</h3>
+<div class="listing-subtitle">
+
+</div>
+</a>
+<div class="listing-categories">
+<div class="listing-category" onclick="window.quartoListingCategory('Python'); return false;">
+Python
+</div>
+<div class="listing-category" onclick="window.quartoListingCategory('Interpretability'); return false;">
+Interpretability
+</div>
+<div class="listing-category" onclick="window.quartoListingCategory('Fairness'); return false;">
+Fairness
+</div>
+</div>
+<a href="./posts/2021-03-29-learning-fair-rulelists-with-faircorels/index.html">
+<div class="listing-description">
+<p>Using Python to learn fair rule lists with FairCORELS</p>
+</div>
+</a>
+</div>
+<div class="metadata">
+<a href="./posts/2021-03-29-learning-fair-rulelists-with-faircorels/index.html">
+<div class="listing-date">
+Mar 29, 2021
+</div>
+<div class="listing-author">
+Ulrich Aïvodji
+</div>
+</a>
+</div>
+</div>
+<div class="quarto-post image-right" data-index="1" data-categories="Explainability,Fairness,Fairwashing" data-listing-date-sort="1556078400000" data-listing-file-modified-sort="1695192431576" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="10">
+<div class="thumbnail">
+<p><a href="./posts/2019-04-24-fairwashing-in-machine-learning/index.html"> <p class="card-img-top"><img src="posts/2019-04-24-fairwashing-in-machine-learning/explanation.png"  class="thumbnail-image card-img"/></p> </a></p>
+</div>
+<div class="body">
+<a href="./posts/2019-04-24-fairwashing-in-machine-learning/index.html">
+<h3 class="no-anchor listing-title">
+Fairwashing in machine learning
+</h3>
+<div class="listing-subtitle">
+
+</div>
+</a>
+<div class="listing-categories">
+<div class="listing-category" onclick="window.quartoListingCategory('Explainability'); return false;">
+Explainability
+</div>
+<div class="listing-category" onclick="window.quartoListingCategory('Fairness'); return false;">
+Fairness
+</div>
+<div class="listing-category" onclick="window.quartoListingCategory('Fairwashing'); return false;">
+Fairwashing
+</div>
+</div>
+<a href="./posts/2019-04-24-fairwashing-in-machine-learning/index.html">
+<div class="listing-description">
+<p>Summary of a paper: Fairwashing – the risk of rationalization</p>
+</div>
+</a>
+</div>
+<div class="metadata">
+<a href="./posts/2019-04-24-fairwashing-in-machine-learning/index.html">
+<div class="listing-date">
+Apr 24, 2019
+</div>
+<div class="listing-author">
+Ulrich Aïvodji
+</div>
+</a>
+</div>
+</div>
+</div>
 <div class="listing-no-matching d-none">
 No matching items
 </div>
-</div>
-</section>
-<section id="code-of-conduct" class="level2">
-<h2 class="anchored" data-anchor-id="code-of-conduct">📜 Code of Conduct</h2>
-<p>TISL is committed to ensuring an enjoyable, positive, and respectful experience for all. We anticipate the collaboration of every member to maintain a secure environment for everyone. For a more detailed version, please refer to the <a href="./coc.html">Code of Conduct</a> page.</p>
-</section>
-<section id="funding" class="level2">
-<h2 class="anchored" data-anchor-id="funding">💰 Funding</h2>
-<p>TISL is supported by the following organizations:</p>
-<ul>
-<li>École de technologie supérieure</li>
-<li>Compute Canada</li>
-<li>NSERC</li>
-<li>CIFAR</li>
-</ul>
-</section>
-<section id="alumni" class="level2">
-<h2 class="anchored" data-anchor-id="alumni">🚀 Alumni</h2>
-<div id="listing-alumni" class="quarto-listing quarto-listing-container-custom">
-  <a href="" target="_blank" rel="noopener">Darius Harold Touko Tchakoua</a>, MSc Student, Non-thesis
-  <br>
-<div class="listing-no-matching d-none">
-No matching items
-</div>
-</div>
-
-
-
-</section>
-
-</main> <!-- /main -->
+</div></main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
 window.document.addEventListener("DOMContentLoaded", function (event) {
   const toggleBodyColorMode = (bsSheetEl) => {

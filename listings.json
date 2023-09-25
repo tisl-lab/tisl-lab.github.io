@@ -2,5 +2,20 @@
   {
     "listing": "/members.html",
     "items": []
+  },
+  {
+    "listing": "/index.html",
+    "items": []
+  },
+  {
+    "listing": "/publications.html",
+    "items": []
+  },
+  {
+    "listing": "/blog.html",
+    "items": [
+      "/posts/2021-03-29-learning-fair-rulelists-with-faircorels/index.html",
+      "/posts/2019-04-24-fairwashing-in-machine-learning/index.html"
+    ]
   }
 ]

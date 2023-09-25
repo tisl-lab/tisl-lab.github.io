@@ -1,0 +1,1531 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.3.306">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="author" content="Ulrich Aïvodji">
+<meta name="dcterms.date" content="2021-03-29">
+<meta name="description" content="Using Python to learn fair rule lists with FairCORELS">
+
+<title>TISL - Learning fair rule lists with FairCORELS</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+/* CSS for citations */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+}
+.hanging-indent div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}</style>
+
+
+<script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../">
+<script src="../../site_libs/quarto-html/quarto.js"></script>
+<script src="../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-dark.css" rel="prefetch" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="../../site_libs/bootstrap/bootstrap-dark.min.css" rel="prefetch" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 20,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit"
+  }
+}</script>
+
+<script src="../../site_libs/kePrint-0.0.1/kePrint.js"></script>
+<link href="../../site_libs/lightable-0.0.1/lightable.css" rel="stylesheet">
+
+  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<link rel="stylesheet" href="../../css/styles.css">
+</head>
+
+<body class="nav-fixed">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg navbar-dark ">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container">
+    <a class="navbar-brand" href="../../index.html">
+    <span class="navbar-title">TISL</span>
+    </a>
+  </div>
+            <div id="quarto-search" class="" title="Search"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll ms-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="../../index.html" rel="" target=""><i class="bi bi-house" role="img">
+</i> 
+ <span class="menu-text">Home</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../publications.html" rel="" target=""><i class="bi bi-book" role="img">
+</i> 
+ <span class="menu-text">Publications</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../blog.html" rel="" target=""><i class="bi bi-pen" role="img">
+</i> 
+ <span class="menu-text">Blog</span></a>
+  </li>  
+</ul>
+            <div class="quarto-navbar-tools">
+  <a href="" class="quarto-color-scheme-toggle quarto-navigation-tool  px-1" onclick="window.quartoToggleColorScheme(); return false;" title="Toggle dark mode"><i class="bi"></i></a>
+</div>
+          </div> <!-- /navcollapse -->
+      </div> <!-- /container-fluid -->
+    </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#prerequisites" id="toc-prerequisites" class="nav-link active" data-scroll-target="#prerequisites">Prerequisites</a>
+  <ul class="collapse">
+  <li><a href="#group-fairness" id="toc-group-fairness" class="nav-link" data-scroll-target="#group-fairness">Group fairness</a></li>
+  <li><a href="#rule-lists" id="toc-rule-lists" class="nav-link" data-scroll-target="#rule-lists">Rule lists</a></li>
+  <li><a href="#corels" id="toc-corels" class="nav-link" data-scroll-target="#corels">CORELS</a></li>
+  <li><a href="#faircorels" id="toc-faircorels" class="nav-link" data-scroll-target="#faircorels">FairCORELS</a></li>
+  </ul></li>
+  <li><a href="#learning-a-fair-rule-list" id="toc-learning-a-fair-rule-list" class="nav-link" data-scroll-target="#learning-a-fair-rule-list">Learning a fair rule list</a>
+  <ul class="collapse">
+  <li><a href="#installation" id="toc-installation" class="nav-link" data-scroll-target="#installation">Installation</a></li>
+  <li><a href="#dataset-and-preprocessing" id="toc-dataset-and-preprocessing" class="nav-link" data-scroll-target="#dataset-and-preprocessing">Dataset and Preprocessing</a></li>
+  <li><a href="#training" id="toc-training" class="nav-link" data-scroll-target="#training">Training</a></li>
+  <li><a href="#evaluation-of-the-rule-list" id="toc-evaluation-of-the-rule-list" class="nav-link" data-scroll-target="#evaluation-of-the-rule-list">Evaluation of the rule list</a></li>
+  </ul></li>
+  <li><a href="#conclusion" id="toc-conclusion" class="nav-link" data-scroll-target="#conclusion">Conclusion</a></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content page-columns page-full" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">Learning fair rule lists with FairCORELS</h1>
+  <div class="quarto-categories">
+    <div class="quarto-category">Python</div>
+    <div class="quarto-category">Interpretability</div>
+    <div class="quarto-category">Fairness</div>
+  </div>
+  </div>
+
+<div>
+  <div class="description">
+    <p>Using Python to learn fair rule lists with FairCORELS</p>
+  </div>
+</div>
+
+
+<div class="quarto-title-meta">
+
+    <div>
+    <div class="quarto-title-meta-heading">Author</div>
+    <div class="quarto-title-meta-contents">
+             <p><a href="https://aivodji.github.io/">Ulrich Aïvodji</a> </p>
+          </div>
+  </div>
+    
+    <div>
+    <div class="quarto-title-meta-heading">Published</div>
+    <div class="quarto-title-meta-contents">
+      <p class="date">March 29, 2021</p>
+    </div>
+  </div>
+  
+    
+  </div>
+  
+
+</header>
+
+<p><a href="https://pypi.org/project/faircorels/">FairCORELS</a> is an open-source library for learning fair rule lists. In this short tutorial, we will learn how to use it to train rule lists under group fairness constraints.</p>
+<section id="prerequisites" class="level1 page-columns page-full">
+<h1>Prerequisites</h1>
+<section id="group-fairness" class="level2 page-columns page-full">
+<h2 class="anchored" data-anchor-id="group-fairness">Group fairness</h2>
+<p>Several notions of fairness have been proposed in the machine learning literature <span class="citation" data-cites="narayanan2018translation chouldechova2018frontiers">(<a href="#ref-narayanan2018translation" role="doc-biblioref">Narayanan 2018</a>; <a href="#ref-chouldechova2018frontiers" role="doc-biblioref">Chouldechova and Roth 2018</a>)</span>. This tutorial will focus on statistical notions of fairness <span class="citation" data-cites="verma2018fairness">(<a href="#ref-verma2018fairness" role="doc-biblioref">Verma and Rubin 2018</a>)</span>, also known as group fairness definitions. Simply put, statistical notions of fairness aim at studying how the performances of a machine learning model, as evaluated by a statistical measure <span class="math inline">\(m\)</span> (<em>e.g.,</em> false positive or false negative rates), differ depending on the group membership of individuals within a dataset. Group memberships are often determined by the values of particular attributes (<em>e.g.,</em> gender, age, ethnicity) hereafter referred to as <strong>sensitive attributes</strong>. In this context, the word <strong>unfairness</strong> is usually used to characterize the gap between the value of <span class="math inline">\(m\)</span> for a majority group (<em>e.g.,</em> historically advantaged individuals) and its value for a minority group (<em>e.g.,</em> historically disadvantaged individuals). <a href="#tbl-groupfairness">Table&nbsp;1</a> summarizes some of the most frequently used statistical notions of fairness.</p>
+<div class="cell page-columns page-full">
+<div class="cell-output-display page-columns page-full">
+<div id="tbl-groupfairness" class="anchored page-columns page-full">
+<table class="lightable-paper lightable-hover table table-sm table-striped small" data-quarto-postprocess="true">
+
+<thead>
+<tr class="header">
+<th style="text-align: left;" data-quarto-table-cell-role="th">name</th>
+<th style="text-align: left;" data-quarto-table-cell-role="th">measure</th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">identifier</th>
+<th style="text-align: left;" data-quarto-table-cell-role="th">method</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">statistical parity (SP)</td>
+<td style="text-align: left;">probability of receiving a positive outcome</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: left;">statistical_parity()</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">predictive parity (PP)</td>
+<td style="text-align: left;">positive predictive value</td>
+<td style="text-align: right;">2</td>
+<td style="text-align: left;">predictive_parity()</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">predictive equality (PE)</td>
+<td style="text-align: left;">false positive rate</td>
+<td style="text-align: right;">3</td>
+<td style="text-align: left;">predictive_equality()</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">equal opportunity (EOpp)</td>
+<td style="text-align: left;">false negative rate</td>
+<td style="text-align: right;">4</td>
+<td style="text-align: left;">predictive_equality()</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">equalized odds (EOdds)</td>
+<td style="text-align: left;">false negative rate and false positive rate</td>
+<td style="text-align: right;">5</td>
+<td style="text-align: left;">equalized_odds()</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">conditional use accuracy equality (CUAE)</td>
+<td style="text-align: left;">positive predictive value and negative predictive value</td>
+<td style="text-align: right;">6</td>
+<td style="text-align: left;">conditional_use_accuracy_equality()</td>
+</tr>
+</tbody>
+</table>
+<div class="quarto-table-caption margin-caption">Table&nbsp;1: Summary of statistical notions of fairness with the related statistical measure involved. The columns <strong>identifier</strong> and <strong>method</strong> represent the id and the method used for the fairness metric within the FairCORELS library.</div></div>
+
+
+</div>
+</div>
+</section>
+<section id="rule-lists" class="level2">
+<h2 class="anchored" data-anchor-id="rule-lists">Rule lists</h2>
+<p>A rule list <span class="citation" data-cites="rivest1987learning angelino2018learning">(<a href="#ref-rivest1987learning" role="doc-biblioref">Rivest 1987</a>; <a href="#ref-angelino2018learning" role="doc-biblioref">Angelino et al. 2018</a>)</span> <span class="math inline">\(r= (d_p, \delta_p, q_0, K)\)</span> of length <span class="math inline">\(K \geq 0\)</span> is a <span class="math inline">\((K+1)-\)</span>tuple consisting of <span class="math inline">\(K\)</span> distinct association rules <span class="math inline">\(p_k \to q_k\)</span>, in which <span class="math inline">\(p_k \in d_p\)</span> is the antecedent of the association rule and <span class="math inline">\(q_k \in \delta_p\)</span> its corresponding consequent, followed by a default prediction <span class="math inline">\(q_0\)</span>. The rule list below predicts whether a person is likely to make at least 50k per year.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode haskell code-with-copy"><code class="sourceCode haskell"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a> <span class="kw">if</span> [capitalGain<span class="op">:&gt;=</span><span class="dv">5119</span>] <span class="kw">then</span> [high]</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="kw">else</span> <span class="kw">if</span> [maritalStatus<span class="op">:</span>single] <span class="kw">then</span> [low]</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="kw">else</span> <span class="kw">if</span> [capitalLoss<span class="op">:</span><span class="dv">1882</span><span class="op">-</span><span class="dv">1978</span>] <span class="kw">then</span> [high]</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="kw">else</span> <span class="kw">if</span> [workclass<span class="op">:</span>private <span class="op">&amp;&amp;</span> education<span class="op">:</span>bachelors] <span class="kw">then</span> [high]</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="kw">else</span> <span class="kw">if</span> [education<span class="op">:</span>masters_doctorate] <span class="kw">then</span> [high]</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="kw">else</span> [low]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>To make a prediction using a rule list, the rules are applied sequentially until one rule applies, in which case the associated outcome is reported. If none of the rules applies, then the default prediction is reported.</p>
+</section>
+<section id="corels" class="level2">
+<h2 class="anchored" data-anchor-id="corels">CORELS</h2>
+<p>CORELS <span class="citation" data-cites="angelino2018learning">(<a href="#ref-angelino2018learning" role="doc-biblioref">Angelino et al. 2018</a>)</span> is a supervised machine learning algorithm which takes as input a feature vector <span class="math inline">\(X\)</span> and its associated label vector <span class="math inline">\(Y\)</span>, all assumed to be binary, and finds the rule list <span class="math inline">\(r\)</span> that minimize the regularized empirical risk: <span class="math inline">\(\mathsf{misc(r, X, y)} + \lambda K\)</span>, where <span class="math inline">\(\mathsf{misc(r, X, y)}\)</span> is the misclassification error of the rule list and <span class="math inline">\(\lambda \geq 0\)</span> is a regularization parameter used to penalize longer rule lists. It represents the search space of the rule lists as a trie and uses an efficient branch-and-bound algorithm to prune it.</p>
+</section>
+<section id="faircorels" class="level2">
+<h2 class="anchored" data-anchor-id="faircorels">FairCORELS</h2>
+<p>FairCORELS <span class="citation" data-cites="aivodji2019learning">(<a href="#ref-aivodji2019learning" role="doc-biblioref">Aïvodji et al. 2019</a>)</span> is a multi-objective formulation of CORELS that aims to learn fair rule lists. More precisely, FairCORELS solves the following optimization problem:</p>
+<p><span class="math display">\[\begin{eqnarray}
+\label{eq:faircorels}
+     
+     \underset{r \in \mathcal{R}}{\operatorname{argmin}}   &amp; \mathsf{misc(r, X, y)} + \lambda K  \\
+    \text{s.t. }   &amp; \texttt{unf}(r,X,y, A) \leq \epsilon, \\
+\end{eqnarray}\]</span></p>
+<p>where the objective function is the regularized empirical risk of CORELS and the constraint requires that the unfairness <span class="math inline">\(unf(r,X,y, A)\)</span> of the solution, for a particular sensitive attribute <span class="math inline">\(A\)</span>, to be less than a value <span class="math inline">\(\epsilon\)</span>.</p>
+</section>
+</section>
+<section id="learning-a-fair-rule-list" class="level1">
+<h1>Learning a fair rule list</h1>
+<p>In this section, we will see how to use FairCORELS to learn a fair rule list.</p>
+<section id="installation" class="level2">
+<h2 class="anchored" data-anchor-id="installation">Installation</h2>
+<p>FairCORELS can be installed easily using <code>pip install faircorels</code>. Read the <a href="https://github.com/ferryjul/fairCORELS/blob/master/README.md">README</a> for more details on the installation process.</p>
+</section>
+<section id="dataset-and-preprocessing" class="level2">
+<h2 class="anchored" data-anchor-id="dataset-and-preprocessing">Dataset and Preprocessing</h2>
+<p>For this tutorial, we will use the <a href="https://archive.ics.uci.edu/ml/datasets/Adult">Adult Income</a> dataset. It contains demographic information of about <span class="math inline">\(48,842\)</span> individuals from the <span class="math inline">\(1994\)</span> U.S. census. The associated classification task consists of predicting whether a particular individual earns more than <span class="math inline">\(50,000\$\)</span> per year. <a href="#tbl-adultincome">Table&nbsp;2</a> shows the first six records of the dataset.</p>
+<div class="cell tbl-cap-location-top">
+<div class="cell-output-display">
+<div id="tbl-adultincome" class="anchored">
+<table class="lightable-paper lightable-hover table table-sm table-striped small" data-quarto-postprocess="true">
+<caption>Table&nbsp;2: First six rows of the Adult Income dataset.</caption>
+<thead>
+<tr class="header">
+<th style="text-align: right;" data-quarto-table-cell-role="th">age</th>
+<th style="text-align: left;" data-quarto-table-cell-role="th">workclass</th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">fnlwgt</th>
+<th style="text-align: left;" data-quarto-table-cell-role="th">education</th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">educational_num</th>
+<th style="text-align: left;" data-quarto-table-cell-role="th">marital_status</th>
+<th style="text-align: left;" data-quarto-table-cell-role="th">occupation</th>
+<th style="text-align: left;" data-quarto-table-cell-role="th">relationship</th>
+<th style="text-align: left;" data-quarto-table-cell-role="th">race</th>
+<th style="text-align: left;" data-quarto-table-cell-role="th">gender</th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">capital_gain</th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">capital_loss</th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">hours_per_week</th>
+<th style="text-align: left;" data-quarto-table-cell-role="th">native_country</th>
+<th style="text-align: left;" data-quarto-table-cell-role="th">income</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: right;">25</td>
+<td style="text-align: left;">Private</td>
+<td style="text-align: right;">226802</td>
+<td style="text-align: left;">11th</td>
+<td style="text-align: right;">7</td>
+<td style="text-align: left;">Never-married</td>
+<td style="text-align: left;">Machine-op-inspct</td>
+<td style="text-align: left;">Own-child</td>
+<td style="text-align: left;">Black</td>
+<td style="text-align: left;">Male</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">40</td>
+<td style="text-align: left;">United-States</td>
+<td style="text-align: left;">&lt;=50K</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">38</td>
+<td style="text-align: left;">Private</td>
+<td style="text-align: right;">89814</td>
+<td style="text-align: left;">HS-grad</td>
+<td style="text-align: right;">9</td>
+<td style="text-align: left;">Married-civ-spouse</td>
+<td style="text-align: left;">Farming-fishing</td>
+<td style="text-align: left;">Husband</td>
+<td style="text-align: left;">White</td>
+<td style="text-align: left;">Male</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">50</td>
+<td style="text-align: left;">United-States</td>
+<td style="text-align: left;">&lt;=50K</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">28</td>
+<td style="text-align: left;">Local-gov</td>
+<td style="text-align: right;">336951</td>
+<td style="text-align: left;">Assoc-acdm</td>
+<td style="text-align: right;">12</td>
+<td style="text-align: left;">Married-civ-spouse</td>
+<td style="text-align: left;">Protective-serv</td>
+<td style="text-align: left;">Husband</td>
+<td style="text-align: left;">White</td>
+<td style="text-align: left;">Male</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">40</td>
+<td style="text-align: left;">United-States</td>
+<td style="text-align: left;">&gt;50K</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">44</td>
+<td style="text-align: left;">Private</td>
+<td style="text-align: right;">160323</td>
+<td style="text-align: left;">Some-college</td>
+<td style="text-align: right;">10</td>
+<td style="text-align: left;">Married-civ-spouse</td>
+<td style="text-align: left;">Machine-op-inspct</td>
+<td style="text-align: left;">Husband</td>
+<td style="text-align: left;">Black</td>
+<td style="text-align: left;">Male</td>
+<td style="text-align: right;">7688</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">40</td>
+<td style="text-align: left;">United-States</td>
+<td style="text-align: left;">&gt;50K</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">34</td>
+<td style="text-align: left;">Private</td>
+<td style="text-align: right;">198693</td>
+<td style="text-align: left;">10th</td>
+<td style="text-align: right;">6</td>
+<td style="text-align: left;">Never-married</td>
+<td style="text-align: left;">Other-service</td>
+<td style="text-align: left;">Not-in-family</td>
+<td style="text-align: left;">White</td>
+<td style="text-align: left;">Male</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">30</td>
+<td style="text-align: left;">United-States</td>
+<td style="text-align: left;">&lt;=50K</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">63</td>
+<td style="text-align: left;">Self-emp-not-inc</td>
+<td style="text-align: right;">104626</td>
+<td style="text-align: left;">Prof-school</td>
+<td style="text-align: right;">15</td>
+<td style="text-align: left;">Married-civ-spouse</td>
+<td style="text-align: left;">Prof-specialty</td>
+<td style="text-align: left;">Husband</td>
+<td style="text-align: left;">White</td>
+<td style="text-align: left;">Male</td>
+<td style="text-align: right;">3103</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">32</td>
+<td style="text-align: left;">United-States</td>
+<td style="text-align: left;">&gt;50K</td>
+</tr>
+</tbody>
+</table>
+</div>
+
+
+</div>
+</div>
+<p>Similar to CORELS, FairCORELS also need input data to be categorical. The dataset will be transformed as follows:</p>
+<ul>
+<li><p>First, all the numerical attributes are converted into categorical ones by using the <em>Minimum Description Length Principle</em> <span class="citation" data-cites="Fayyad1993MultiIntervalDO">(<a href="#ref-Fayyad1993MultiIntervalDO" role="doc-biblioref">Fayyad and Irani 1993</a>)</span>.</p></li>
+<li><p>Afterwards, one-hot encoding is applied to the resulting dataset.</p></li>
+<li><p>Finally, the set of rules (composed of single-clause, negative single-clause, and two-clauses rules) is constructed by applying <strong>FPGrowth</strong> <span class="citation" data-cites="han2000mining">(<a href="#ref-han2000mining" role="doc-biblioref">Han, Pei, and Yin 2000</a>)</span> to the one-hot encoded dataset.</p></li>
+</ul>
+<p><a href="#tbl-adultincomebin">Table&nbsp;3</a> gives an overview of the preprocessed dataset.</p>
+<div class="cell tbl-cap-location-top">
+<div class="cell-output-display">
+<div id="tbl-adultincomebin" class="anchored">
+<table class="lightable-paper lightable-hover table table-sm table-striped small" data-quarto-postprocess="true">
+<caption>Table&nbsp;3: First six rows of the binarized dataset.</caption>
+<thead>
+<tr class="header">
+<th style="text-align: right;" data-quarto-table-cell-role="th">workclass.fedGov</th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">workclass.otherGov</th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">workclass.private</th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">workclass.selfEmployed</th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">workclass.unEmployed</th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">education.associates</th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">education.bachelors</th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">education.dropout</th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">education.hs_grad</th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">education.masters_doctorate</th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">education.prof_school</th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">marital_status.married</th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">marital_status.single</th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">occupation.blueCollar</th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">occupation.other</th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">occupation.professional</th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">occupation.sales</th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">occupation.whiteCollar</th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">gender.Female</th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">gender.Male</th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">age..20.5</th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">age.20.5.23.5</th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">age.23.5.24.5</th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">age.24.5.27.5</th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">age.27.5.29.5</th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">age.29.5.35.5</th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">age.35.5.41.5</th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">age.41.5.54.5</th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">age.54.5.61.5</th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">age..61.5</th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">capital_gain..57.0</th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">capital_gain.57.0.3048.0</th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">capital_gain.3048.0.3120.0</th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">capital_gain.3120.0.4243.5</th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">capital_gain.4243.5.4401.0</th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">capital_gain.4401.0.4668.5</th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">capital_gain.4668.5.4826.0</th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">capital_gain.4826.0.4932.5</th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">capital_gain.4932.5.4973.5</th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">capital_gain.4973.5.5119.0</th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">capital_gain.5119.0.5316.5</th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">capital_gain.5316.5.5505.5</th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">capital_gain.5505.5.6618.5</th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">capital_gain.6618.5.7055.5</th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">capital_gain..7055.5</th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">capital_loss..1551.5</th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">capital_loss.1551.5.1568.5</th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">capital_loss.1568.5.1820.5</th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">capital_loss.1820.5.1859.0</th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">capital_loss.1859.0.1881.5</th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">capital_loss.1881.5.1894.5</th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">capital_loss.1894.5.1927.5</th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">capital_loss.1927.5.1975.5</th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">capital_loss.1975.5.1978.5</th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">capital_loss.1978.5.2168.5</th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">capital_loss.2168.5.2176.5</th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">capital_loss.2176.5.2218.5</th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">capital_loss.2218.5.2252.0</th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">capital_loss.2252.0.2384.5</th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">capital_loss.2384.5.2450.5</th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">capital_loss.2450.5.2469.5</th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">capital_loss.2469.5.3089.5</th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">capital_loss..3089.5</th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">hours_per_week..34.5</th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">hours_per_week.34.5.39.5</th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">hours_per_week.39.5.41.5</th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">hours_per_week.41.5.49.5</th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">hours_per_week.49.5.61.5</th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">hours_per_week..61.5</th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">income</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">1</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">1</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+</tr>
+</tbody>
+</table>
+</div>
+
+
+</div>
+</div>
+</section>
+<section id="training" class="level2">
+<h2 class="anchored" data-anchor-id="training">Training</h2>
+<p>To train the constrained rule list, we will need the following libraries:</p>
+<ul>
+<li><p><strong>pandas</strong>: to load the dataset.</p></li>
+<li><p><strong>sklearn</strong>: to split the dataset into <em>train</em> and <em>test</em> sets.</p></li>
+<li><p><strong>faircorels</strong>: to train the rule list with fairness constraint and to evaluate the unfairness and the accuracy</p></li>
+</ul>
+<p>First, let’s load the libraries!</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> faircorels <span class="im">import</span> FairCorelsClassifier, ConfusionMatrix, Metric</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.model_selection <span class="im">import</span> train_test_split</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Now, we will perform the following tasks:</p>
+<ul>
+<li>Load the preprocessed dataset.</li>
+<li>Separate the feature vector from the label vector.</li>
+<li>Remove the feature vector that characterizes the majority and the minority groups. In fact, the sensitive attribute is only used to enforce the fairness contraint at training time. The sensitive attribute is not used at inference time to avoid <strong><a href="https://en.wikipedia.org/wiki/Disparate_treatment">disparate treatment</a></strong>.</li>
+<li>Split the dataset into train and test sets.</li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co"># loading the preprocessed dataset</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>df <span class="op">=</span> pd.read_csv(<span class="st">"../../../datasets/adult_income/binary.csv"</span>)</span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a><span class="co"># getting the label vector</span></span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>y <span class="op">=</span> df[<span class="st">"income"</span>]</span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>y <span class="op">=</span> y.to_numpy()</span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a><span class="co"># getting the majority and minority groups</span></span>
+<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a>maj_group <span class="op">=</span> df[<span class="st">"gender:Male"</span>]</span>
+<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a>min_group <span class="op">=</span> df[<span class="st">"gender:Female"</span>]</span>
+<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a><span class="co">#getting the rest ot the features </span></span>
+<span id="cb3-14"><a href="#cb3-14" aria-hidden="true" tabindex="-1"></a>X <span class="op">=</span> df.drop([<span class="st">"income"</span>, <span class="st">"gender:Male"</span>, <span class="st">"gender:Female"</span>], axis<span class="op">=</span><span class="dv">1</span>)</span>
+<span id="cb3-15"><a href="#cb3-15" aria-hidden="true" tabindex="-1"></a>features <span class="op">=</span> X.columns.tolist()</span>
+<span id="cb3-16"><a href="#cb3-16" aria-hidden="true" tabindex="-1"></a>X <span class="op">=</span> X.to_numpy()</span>
+<span id="cb3-17"><a href="#cb3-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-18"><a href="#cb3-18" aria-hidden="true" tabindex="-1"></a><span class="co"># split the dataset into train/test sets</span></span>
+<span id="cb3-19"><a href="#cb3-19" aria-hidden="true" tabindex="-1"></a>X_train, X_test, y_train, y_test, <span class="op">\</span></span>
+<span id="cb3-20"><a href="#cb3-20" aria-hidden="true" tabindex="-1"></a>maj_group_train, maj_group_test, <span class="op">\</span></span>
+<span id="cb3-21"><a href="#cb3-21" aria-hidden="true" tabindex="-1"></a>min_group_train, min_group_test <span class="op">=</span>  train_test_split(X, y, </span>
+<span id="cb3-22"><a href="#cb3-22" aria-hidden="true" tabindex="-1"></a>                                                    maj_group, </span>
+<span id="cb3-23"><a href="#cb3-23" aria-hidden="true" tabindex="-1"></a>                                                    min_group,</span>
+<span id="cb3-24"><a href="#cb3-24" aria-hidden="true" tabindex="-1"></a>                                                    test_size<span class="op">=</span><span class="fl">0.33</span>, </span>
+<span id="cb3-25"><a href="#cb3-25" aria-hidden="true" tabindex="-1"></a>                                                    random_state<span class="op">=</span><span class="dv">42</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Finally, we can train the rule list.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co"># create the model</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>clf <span class="op">=</span> FairCorelsClassifier( </span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>                        c <span class="op">=</span> <span class="fl">1e-3</span>,</span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>                        mode <span class="op">=</span> <span class="dv">3</span>,</span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>                        fairness <span class="op">=</span> <span class="dv">4</span>,</span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>                        epsilon <span class="op">=</span> <span class="fl">0.95</span>,</span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>                        max_card <span class="op">=</span> <span class="dv">1</span>,</span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a>                        maj_vect <span class="op">=</span> maj_group_train,</span>
+<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a>                        min_vect <span class="op">=</span> min_group_train,</span>
+<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a>                        n_iter <span class="op">=</span> <span class="dv">300000</span>, </span>
+<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a>                        policy <span class="op">=</span> <span class="st">"bfs"</span>,</span>
+<span id="cb4-12"><a href="#cb4-12" aria-hidden="true" tabindex="-1"></a>                        bfs_mode <span class="op">=</span> <span class="dv">2</span>,</span>
+<span id="cb4-13"><a href="#cb4-13" aria-hidden="true" tabindex="-1"></a>                        verbosity <span class="op">=</span> [])</span>
+<span id="cb4-14"><a href="#cb4-14" aria-hidden="true" tabindex="-1"></a><span class="co"># train the model</span></span>
+<span id="cb4-15"><a href="#cb4-15" aria-hidden="true" tabindex="-1"></a>clf.fit(X_train, y_train, features<span class="op">=</span>features, prediction_name<span class="op">=</span><span class="st">"[income:&gt;50K]"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>The rule list model is instantiated using the <strong>FairCorelsClassifier</strong> class with the following parameters:</p>
+<ul>
+<li><p><strong>c</strong>: is the weight of the rule list’s length regularizer.</p></li>
+<li><p><strong>mode</strong>: determines the optimization methods. A value of <strong>3</strong> corresponds to the <em>epsilon constraint</em> method. That is, it will fix a value for the unfairness and then maximize the accuracy.</p></li>
+<li><p><strong>fairness</strong>: identifier of the fairness metric used. See Table @ref(tab:groupfairness) to get the identifier of each fairness metric and their corresponding methods. For this example, we used the <strong>equal opportunity</strong> metric.</p></li>
+<li><p><strong>epsilon</strong>: is the value of the fairness constraint. So, a value of 0.95 means that we want an unfairness gap of <strong>0.05</strong>.</p></li>
+<li><p><strong>max_card</strong>: maximum cardinality allowed when mining rules. In this example, we use <strong>max_card = 1</strong> since we have already performed the mining with <strong>FPGrowth</strong>.</p></li>
+<li><p><strong>maj_vect</strong> and <strong>min_vect</strong>: are used to specify the majority and minority groups</p></li>
+<li><p><strong>n_iter</strong>: is used to specify the maximum number of nodes (rule lists) to search before exiting. Even if branch-and-bound is an exact method, we will need to stop the search algorithm after a certain number of iterations to avoid high computational overhead. However, whenever the algorithm stops, we have the guarantee that the best rule list given the computational constraint is returned.</p></li>
+<li><p><strong>policy</strong> and <strong>bfs_mode</strong>: are used to specify, the exploration strategy. That is, how nodes are ordered within the priority queue of the branch-and-bound framework. Here, we use a breadth-first search and nodes are selected according to the value of the objective function of the rule lists that they represent.</p></li>
+</ul>
+<p>The rule list is trained with the <strong>fit</strong> method.</p>
+</section>
+<section id="evaluation-of-the-rule-list" class="level2">
+<h2 class="anchored" data-anchor-id="evaluation-of-the-rule-list">Evaluation of the rule list</h2>
+<p>To obtain the trained model’s description, we can use the <strong>rl_</strong> attribute of the rule list object.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(clf.rl_)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>We can compute the accuracy of the model by using the <strong>score</strong> method.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>accuracy_train <span class="op">=</span> clf.score(X_train, y_train)</span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>accuracy_test <span class="op">=</span> clf.score(X_test, y_test)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Accuracy train: </span><span class="sc">{}</span><span class="st">"</span>.<span class="bu">format</span>(accuracy_train))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Accuracy test: </span><span class="sc">{}</span><span class="st">"</span>.<span class="bu">format</span>(accuracy_test))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>To compute the unfairness, we will use the <strong>ConfusionMatrix</strong> and <strong>Metric</strong> classes.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> compute_unfairness(min_group, maj_group, X, y):</span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>  cm <span class="op">=</span> ConfusionMatrix(min_group, maj_group, clf.predict(X), y)</span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>  cm_minority, cm_majority <span class="op">=</span> cm.get_matrix()</span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>  fairness_metric <span class="op">=</span> Metric(cm_minority, cm_majority)</span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a>  <span class="cf">return</span> fairness_metric</span>
+<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a>fairness_metric_train <span class="op">=</span> compute_unfairness(min_group_train, maj_group_train, </span>
+<span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a>                                            X_train, y_train)</span>
+<span id="cb9-9"><a href="#cb9-9" aria-hidden="true" tabindex="-1"></a>fairness_metric_test  <span class="op">=</span> compute_unfairness(min_group_test, maj_group_test, </span>
+<span id="cb9-10"><a href="#cb9-10" aria-hidden="true" tabindex="-1"></a>                                            X_test, y_test)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Unfairness train: </span><span class="sc">{}</span><span class="st">"</span>.<span class="bu">format</span>(fairness_metric_train.equal_opportunity()))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Unfairness test: </span><span class="sc">{}</span><span class="st">"</span>.<span class="bu">format</span>(fairness_metric_test.equal_opportunity()))                                                         </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>To evaluate the unfairness, we first create a confusion matrix for both the minority and majority groups using the <strong>ConfusionMatrix</strong> class. Then, we create a metric object using <strong>Metric</strong>. Finally, we get the value of the unfairness using the corresponding method <em>equal_opportunity()</em>.</p>
+<p>In this particular example, we can see that the learned rule list effectively has an unfairness that is lower than <em>0.05</em> and an accuracy of <em>0.819</em> on the training set. It also generalizes well: it has an unfairness close to <em>0.00</em> and an accuracy of <em>0.816</em> on the test set.</p>
+</section>
+</section>
+<section id="conclusion" class="level1">
+<h1>Conclusion</h1>
+<p>In this short tutorial, we learned how to train rule lists under group fairness constraints using FairCORELS. More details about FairCORELS can be found in our paper <strong>Learning Fair Rule Lists</strong> <span class="citation" data-cites="aivodji2019learning">(<a href="#ref-aivodji2019learning" role="doc-biblioref">Aïvodji et al. 2019</a>)</span>.</p>
+
+
+
+</section>
+
+<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" role="doc-bibliography"><h2 class="anchored quarto-appendix-heading">References</h2><div id="refs" class="references csl-bib-body hanging-indent" role="list">
+<div id="ref-aivodji2019learning" class="csl-entry" role="listitem">
+Aïvodji, Ulrich, Julien Ferry, Sébastien Gambs, Marie-José Huguet, and Mohamed Siala. 2019. <span>“Learning Fair Rule Lists.”</span> <em>arXiv Preprint arXiv:1909.03977</em>.
+</div>
+<div id="ref-angelino2018learning" class="csl-entry" role="listitem">
+Angelino, Elaine, Nicholas Larus-Stone, Daniel Alabi, Margo Seltzer, and Cynthia Rudin. 2018. <span>“Learning Certifiably Optimal Rule Lists for Categorical Data.”</span> <em>Journal of Machine Learning Research</em> 18 (234): 1–78.
+</div>
+<div id="ref-chouldechova2018frontiers" class="csl-entry" role="listitem">
+Chouldechova, Alexandra, and Aaron Roth. 2018. <span>“The Frontiers of Fairness in Machine Learning.”</span> <em>arXiv Preprint arXiv:1810.08810</em>.
+</div>
+<div id="ref-Fayyad1993MultiIntervalDO" class="csl-entry" role="listitem">
+Fayyad, Usama M., and Keki B. Irani. 1993. <span>“Multi-Interval Discretization of Continuous-Valued Attributes for Classification Learning.”</span> In <em>IJCAI</em>.
+</div>
+<div id="ref-han2000mining" class="csl-entry" role="listitem">
+Han, Jiawei, Jian Pei, and Yiwen Yin. 2000. <span>“Mining Frequent Patterns Without Candidate Generation.”</span> <em>ACM Sigmod Record</em> 29 (2): 1–12.
+</div>
+<div id="ref-narayanan2018translation" class="csl-entry" role="listitem">
+Narayanan, Arvind. 2018. <span>“Translation Tutorial: 21 Fairness Definitions and Their Politics.”</span> In <em>Proc. Conf. Fairness Accountability Transp., New York, USA</em>.
+</div>
+<div id="ref-rivest1987learning" class="csl-entry" role="listitem">
+Rivest, Ronald L. 1987. <span>“Learning Decision Lists.”</span> <em>Machine Learning</em> 2 (3): 229–46.
+</div>
+<div id="ref-verma2018fairness" class="csl-entry" role="listitem">
+Verma, Sahil, and Julia Rubin. 2018. <span>“Fairness Definitions Explained.”</span> In <em>2018 Ieee/Acm International Workshop on Software Fairness (Fairware)</em>, 1–7. IEEE.
+</div>
+</div></section></div></main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const disableStylesheet = (stylesheets) => {
+    for (let i=0; i < stylesheets.length; i++) {
+      const stylesheet = stylesheets[i];
+      stylesheet.rel = 'prefetch';
+    }
+  }
+  const enableStylesheet = (stylesheets) => {
+    for (let i=0; i < stylesheets.length; i++) {
+      const stylesheet = stylesheets[i];
+      stylesheet.rel = 'stylesheet';
+    }
+  }
+  const manageTransitions = (selector, allowTransitions) => {
+    const els = window.document.querySelectorAll(selector);
+    for (let i=0; i < els.length; i++) {
+      const el = els[i];
+      if (allowTransitions) {
+        el.classList.remove('notransition');
+      } else {
+        el.classList.add('notransition');
+      }
+    }
+  }
+  const toggleColorMode = (alternate) => {
+    // Switch the stylesheets
+    const alternateStylesheets = window.document.querySelectorAll('link.quarto-color-scheme.quarto-color-alternate');
+    manageTransitions('#quarto-margin-sidebar .nav-link', false);
+    if (alternate) {
+      enableStylesheet(alternateStylesheets);
+      for (const sheetNode of alternateStylesheets) {
+        if (sheetNode.id === "quarto-bootstrap") {
+          toggleBodyColorMode(sheetNode);
+        }
+      }
+    } else {
+      disableStylesheet(alternateStylesheets);
+      toggleBodyColorPrimary();
+    }
+    manageTransitions('#quarto-margin-sidebar .nav-link', true);
+    // Switch the toggles
+    const toggles = window.document.querySelectorAll('.quarto-color-scheme-toggle');
+    for (let i=0; i < toggles.length; i++) {
+      const toggle = toggles[i];
+      if (toggle) {
+        if (alternate) {
+          toggle.classList.add("alternate");     
+        } else {
+          toggle.classList.remove("alternate");
+        }
+      }
+    }
+    // Hack to workaround the fact that safari doesn't
+    // properly recolor the scrollbar when toggling (#1455)
+    if (navigator.userAgent.indexOf('Safari') > 0 && navigator.userAgent.indexOf('Chrome') == -1) {
+      manageTransitions("body", false);
+      window.scrollTo(0, 1);
+      setTimeout(() => {
+        window.scrollTo(0, 0);
+        manageTransitions("body", true);
+      }, 40);  
+    }
+  }
+  const isFileUrl = () => { 
+    return window.location.protocol === 'file:';
+  }
+  const hasAlternateSentinel = () => {  
+    let styleSentinel = getColorSchemeSentinel();
+    if (styleSentinel !== null) {
+      return styleSentinel === "alternate";
+    } else {
+      return false;
+    }
+  }
+  const setStyleSentinel = (alternate) => {
+    const value = alternate ? "alternate" : "default";
+    if (!isFileUrl()) {
+      window.localStorage.setItem("quarto-color-scheme", value);
+    } else {
+      localAlternateSentinel = value;
+    }
+  }
+  const getColorSchemeSentinel = () => {
+    if (!isFileUrl()) {
+      const storageValue = window.localStorage.getItem("quarto-color-scheme");
+      return storageValue != null ? storageValue : localAlternateSentinel;
+    } else {
+      return localAlternateSentinel;
+    }
+  }
+  let localAlternateSentinel = 'default';
+  // Dark / light mode switch
+  window.quartoToggleColorScheme = () => {
+    // Read the current dark / light value 
+    let toAlternate = !hasAlternateSentinel();
+    toggleColorMode(toAlternate);
+    setStyleSentinel(toAlternate);
+  };
+  // Ensure there is a toggle, if there isn't float one in the top right
+  if (window.document.querySelector('.quarto-color-scheme-toggle') === null) {
+    const a = window.document.createElement('a');
+    a.classList.add('top-right');
+    a.classList.add('quarto-color-scheme-toggle');
+    a.href = "";
+    a.onclick = function() { try { window.quartoToggleColorScheme(); } catch {} return false; };
+    const i = window.document.createElement("i");
+    i.classList.add('bi');
+    a.appendChild(i);
+    window.document.body.appendChild(a);
+  }
+  // Switch to dark mode if need be
+  if (hasAlternateSentinel()) {
+    toggleColorMode(true);
+  } else {
+    toggleColorMode(false);
+  }
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    text: function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  function tippyHover(el, contentFn) {
+    const config = {
+      allowHTML: true,
+      content: contentFn,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start'
+    };
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+</div> <!-- /content -->
+<footer class="footer">
+  <div class="nav-footer">
+    <div class="nav-footer-left">Made with <a href="https://quarto.org/">Quarto</a></div>   
+    <div class="nav-footer-center">
+      &nbsp;
+    </div>
+    <div class="nav-footer-right">
+      <ul class="footer-items list-unstyled">
+    <li class="nav-item compact">
+    <a class="nav-link" href="https://github.com/tisl-lab">
+      <i class="bi bi-github" role="img">
+</i> 
+    </a>
+  </li>  
+    <li class="nav-item compact">
+    <a class="nav-link" href="mailto:ulrich.aivodji@etsmtl.ca">
+      <i class="bi bi-envelope" role="img">
+</i> 
+    </a>
+  </li>  
+</ul>
+    </div>
+  </div>
+</footer>
+
+
+
+</body></html>

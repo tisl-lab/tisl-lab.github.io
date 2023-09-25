@@ -1,0 +1,927 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.3.306">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>TISL - Publications</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+</style>
+
+
+<script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/quarto-nav/headroom.min.js"></script>
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="site_libs/quarto-search/fuse.min.js"></script>
+<script src="site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="./">
+<script src="site_libs/quarto-listing/list.min.js"></script>
+<script src="site_libs/quarto-listing/quarto-listing.js"></script>
+<script src="site_libs/quarto-html/quarto.js"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-dark.css" rel="prefetch" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-dark.min.css" rel="prefetch" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 20,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit"
+  }
+}</script>
+<script>
+
+  window.document.addEventListener("DOMContentLoaded", function (_event) {
+    const listingTargetEl = window.document.querySelector('#listing-confs .list');
+    if (!listingTargetEl) {
+      // No listing discovered, do not attach.
+      return; 
+    }
+
+    const options = {
+      valueNames: ['listing-year','listing-title','listing-venue',{ data: ['index'] },{ data: ['categories'] },{ data: ['listing-year-sort'] }],
+      page: 4,
+    pagination: { item: "<li class='page-item'><a class='page page-link' href='#'></a></li>" },
+      searchColumns: ["listing-title","listing-authors","listing-year","listing-preprint","listing-published_url","listing-venue","listing-github"],
+    };
+
+    window['quarto-listings'] = window['quarto-listings'] || {};
+    window['quarto-listings']['listing-confs'] = new List('listing-confs', options);
+
+    if (window['quarto-listing-loaded']) {
+      window['quarto-listing-loaded']();
+    }
+  });
+
+  window.addEventListener('hashchange',() => {
+    if (window['quarto-listing-loaded']) {
+      window['quarto-listing-loaded']();
+    }
+  })
+  
+
+  window.document.addEventListener("DOMContentLoaded", function (_event) {
+    const listingTargetEl = window.document.querySelector('#listing-journals .list');
+    if (!listingTargetEl) {
+      // No listing discovered, do not attach.
+      return; 
+    }
+
+    const options = {
+      valueNames: ['listing-year','listing-title','listing-venue',{ data: ['index'] },{ data: ['categories'] },{ data: ['listing-year-sort'] }],
+      page: 4,
+    pagination: { item: "<li class='page-item'><a class='page page-link' href='#'></a></li>" },
+      searchColumns: ["listing-title","listing-authors","listing-year","listing-preprint","listing-published_url","listing-venue","listing-github"],
+    };
+
+    window['quarto-listings'] = window['quarto-listings'] || {};
+    window['quarto-listings']['listing-journals'] = new List('listing-journals', options);
+
+    if (window['quarto-listing-loaded']) {
+      window['quarto-listing-loaded']();
+    }
+  });
+
+  window.addEventListener('hashchange',() => {
+    if (window['quarto-listing-loaded']) {
+      window['quarto-listing-loaded']();
+    }
+  })
+  
+
+  window.document.addEventListener("DOMContentLoaded", function (_event) {
+    const listingTargetEl = window.document.querySelector('#listing-workshops .list');
+    if (!listingTargetEl) {
+      // No listing discovered, do not attach.
+      return; 
+    }
+
+    const options = {
+      valueNames: ['listing-year','listing-title','listing-venue',{ data: ['index'] },{ data: ['categories'] },{ data: ['listing-year-sort'] }],
+      page: 4,
+    pagination: { item: "<li class='page-item'><a class='page page-link' href='#'></a></li>" },
+      searchColumns: ["listing-title","listing-authors","listing-year","listing-venue","listing-published_url"],
+    };
+
+    window['quarto-listings'] = window['quarto-listings'] || {};
+    window['quarto-listings']['listing-workshops'] = new List('listing-workshops', options);
+
+    if (window['quarto-listing-loaded']) {
+      window['quarto-listing-loaded']();
+    }
+  });
+
+  window.addEventListener('hashchange',() => {
+    if (window['quarto-listing-loaded']) {
+      window['quarto-listing-loaded']();
+    }
+  })
+  
+
+  window.document.addEventListener("DOMContentLoaded", function (_event) {
+    const listingTargetEl = window.document.querySelector('#listing-preprints .list');
+    if (!listingTargetEl) {
+      // No listing discovered, do not attach.
+      return; 
+    }
+
+    const options = {
+      valueNames: ['listing-year','listing-title','listing-venue',{ data: ['index'] },{ data: ['categories'] },{ data: ['listing-year-sort'] }],
+      page: 4,
+    pagination: { item: "<li class='page-item'><a class='page page-link' href='#'></a></li>" },
+      searchColumns: ["listing-title","listing-authors","listing-year","listing-published_url"],
+    };
+
+    window['quarto-listings'] = window['quarto-listings'] || {};
+    window['quarto-listings']['listing-preprints'] = new List('listing-preprints', options);
+
+    if (window['quarto-listing-loaded']) {
+      window['quarto-listing-loaded']();
+    }
+  });
+
+  window.addEventListener('hashchange',() => {
+    if (window['quarto-listing-loaded']) {
+      window['quarto-listing-loaded']();
+    }
+  })
+  </script>
+
+  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<link rel="stylesheet" href="css/styles.css">
+</head>
+
+<body class="nav-fixed">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg navbar-dark ">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container">
+    <a class="navbar-brand" href="./index.html">
+    <span class="navbar-title">TISL</span>
+    </a>
+  </div>
+            <div id="quarto-search" class="" title="Search"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll ms-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="./index.html" rel="" target=""><i class="bi bi-house" role="img">
+</i> 
+ <span class="menu-text">Home</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link active" href="./publications.html" rel="" target="" aria-current="page"><i class="bi bi-book" role="img">
+</i> 
+ <span class="menu-text">Publications</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="./blog.html" rel="" target=""><i class="bi bi-pen" role="img">
+</i> 
+ <span class="menu-text">Blog</span></a>
+  </li>  
+</ul>
+            <div class="quarto-navbar-tools">
+  <a href="" class="quarto-color-scheme-toggle quarto-navigation-tool  px-1" onclick="window.quartoToggleColorScheme(); return false;" title="Toggle dark mode"><i class="bi"></i></a>
+</div>
+          </div> <!-- /navcollapse -->
+      </div> <!-- /container-fluid -->
+    </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#publications" id="toc-publications" class="nav-link active" data-scroll-target="#publications">🧸 Publications</a>
+  <ul class="collapse">
+  <li><a href="#conferences" id="toc-conferences" class="nav-link" data-scroll-target="#conferences">Conferences</a></li>
+  <li><a href="#journals" id="toc-journals" class="nav-link" data-scroll-target="#journals">Journals</a></li>
+  <li><a href="#workshops" id="toc-workshops" class="nav-link" data-scroll-target="#workshops">Workshops</a></li>
+  <li><a href="#preprints" id="toc-preprints" class="nav-link" data-scroll-target="#preprints">Preprints</a></li>
+  </ul></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">Publications</h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+</header>
+
+<section id="publications" class="level2">
+<h2 class="anchored" data-anchor-id="publications">🧸 Publications</h2>
+<section id="conferences" class="level3">
+<h3 class="anchored" data-anchor-id="conferences">Conferences</h3>
+<div id="listing-confs" class="quarto-listing quarto-listing-container-custom">
+<div class="listing-actions-group">
+   <div class="input-group input-group-sm quarto-listing-sort">
+     <span class="input-group-text"><i class="bi bi-sort-down"></i></span>
+     <select id="listing-confs-sort" class="form-select" aria-label="Order By" onchange="window['quarto-listings']['listing-confs'].sort(this.options[this.selectedIndex].value, { order: this.options[this.selectedIndex].getAttribute('data-direction')})">
+       <option value="" disabled="" selected="" hidden="">Order By</option>
+       <option value="index" data-direction="asc">Default</option>
+         <option value="listing-title" data-direction="asc">
+          Title
+        </option>
+         <option value="listing-year-sort" data-direction="asc">
+          year (Low to High)
+        </option>
+         <option value="listing-year-sort" data-direction="desc">
+          year (High to Low)
+        </option>
+         <option value="listing-venue" data-direction="asc">
+          venue
+        </option>
+     </select>
+  </div>
+    <div class="input-group input-group-sm quarto-listing-filter">
+      <span class="input-group-text"><i class="bi bi-search"></i></span>
+      <input type="text" class="search form-control" placeholder="Filter">
+    </div>
+</div>
+<ul class="list">
+      <li data-index="0" data-listing-year-sort="2023">
+        <a href="https://ieeexplore.ieee.org/abstract/document/10136153" class="listing-title">Exploiting Fairness to Enhance Sensitive Attributes Reconstruction</a>. 
+        Julien Ferry, <strong>Ulrich Aïvodji</strong>, Sébastien Gambs, Marie-José Huguet, Mohamed Siala. <span class="listing-venue">IEEE Conference on Secure and Trustworthy Machine Learning - SaTML</span>, <span class="listing-year">2023</span>.
+      </li>
+      <li data-index="1" data-listing-year-sort="2023">
+        <a href="https://ieeexplore.ieee.org/abstract/document/10136153" class="listing-title">Fooling SHAP with Stealthily Biased Sampling</a>. 
+        Gabriel Laberge, <strong>Ulrich Aïvodji</strong>, Satoshi Hara, Mario Marchand, Foutse Khomh. <span class="listing-venue">International Conference on Learning Representations - ICLR</span>, <span class="listing-year">2023</span>.
+      </li>
+      <li data-index="2" data-listing-year-sort="2022">
+        <a href="https://link.springer.com/chapter/10.1007/978-3-031-08011-1_9" class="listing-title">Leveraging Integer Linear Programming to Learn Optimal Fair Rule Lists</a>. 
+        Julien Ferry, <strong>Ulrich Aïvodji</strong>, Sébastien Gambs, Marie-José Huguet, Mohamed Siala. <span class="listing-venue">International Conference on the Integration of Constraint Programming, Artificial Intelligence, and Operations Research - CPAIOR</span>, <span class="listing-year">2022</span>.
+      </li>
+      <li data-index="3" data-listing-year-sort="2022">
+        <a href="https://dl.acm.org/doi/10.1145/3514094.3534159" class="listing-title">Fairness via Explanation Quality: Evaluating Disparities in the Quality of Post hoc Explanations</a>. 
+        Jessica Dai, Sohini Upadhyay, <strong>Ulrich Aïvodji</strong>, Stephen H. Bach, Himabindu Lakkaraju. <span class="listing-venue">AAAI/ACM Conference on AI, Ethics, and Society - AIES</span>, <span class="listing-year">2022</span>.
+      </li>
+      <li data-index="4" data-listing-year-sort="2022">
+        <a href="https://proceedings.neurips.cc/paper_files/paper/2022/hash/5b84864ff8474fd742c66f219b2eaac1-Abstract-Conference.html" class="listing-title">Washing The Unwashable: On The (Im) possibility of Fairwashing Detection</a>. 
+        Ali Shahin Shamsabadi, Mohammad Yaghini, Natalie Dullerud, Sierra Wyllie, <strong>Ulrich Aïvodji</strong>, Aisha Alaagib Alryeh Mkean, Sébastien Gambs, Nicolas Papernot. <span class="listing-venue">Conference on Neural Information Processing Systems - NeurIPS</span>, <span class="listing-year">2022</span>.
+      </li>
+      <li data-index="5" data-listing-year-sort="2021">
+        <a href="https://ieeexplore.ieee.org/abstract/document/9385546/" class="listing-title">Learning-based Incast Performance Inference in Software-Defined Data Centers</a>. 
+        Benoit Nougnanke, Yann Labit, Marc Bruyere, Simone Ferlin, <strong>Ulrich Aïvodji</strong>. <span class="listing-venue">Conference on Innovation in Clouds, Internet and Networks - ICIN</span>, <span class="listing-year">2021</span>.
+      </li>
+      <li data-index="6" data-listing-year-sort="2021">
+        <a href="https://dl.acm.org/doi/abs/10.1145/3459637.3481965" class="listing-title">FairCORELS, an Open-Source Library for Learning Fair Rule Lists</a>. 
+        <strong>Ulrich Aïvodji</strong>, Julien Ferry, Sébastien Gambs, Marie-José Huguet, Mohamed Siala. <span class="listing-venue">ACM International Conference on Information and Knowledge Management - CIKM, Demo Track</span>, <span class="listing-year">2021</span>.
+      </li>
+      <li data-index="7" data-listing-year-sort="2021">
+        <a href="https://proceedings.neurips.cc/paper/2021/hash/7caf5e22ea3eb8175ab518429c8589a4-Abstract.html" class="listing-title">Characterizing the risk of fairwashing</a>. 
+        <strong>Ulrich Aïvodji</strong>, Hiromi Arai, Sébastien Gambs, Satoshi Hara. <span class="listing-venue">Conference on Neural Information Processing Systems - NeurIPS</span>, <span class="listing-year">2021</span>.
+      </li>
+      <li data-index="8" data-listing-year-sort="2019">
+        <a href="http://proceedings.mlr.press/v97/aivodji19a" class="listing-title">Fairwashing: the risk of rationalization</a>. 
+        <strong>Ulrich Aïvodji</strong>, Hiromi Arai, Olivier Fortineau, Sébastien Gambs, Satoshi Hara, Alain Tapp. <span class="listing-venue">International Conference on Machine Learning - ICML</span>, <span class="listing-year">2019</span>.
+      </li>
+      <li data-index="9" data-listing-year-sort="2018">
+        <a href="https://dl.acm.org/citation.cfm?id=3212483" class="listing-title">Sride: A privacy-preserving ridesharing system</a>. 
+        <strong>Ulrich Aïvodji</strong>, Kévin Huguenin, Marie-José Huguet, Marc-Olivier Killijian. <span class="listing-venue">ACM Conference on Security &amp; Privacy in Wireless and Mobile Networks - WiSec</span>, <span class="listing-year">2018</span>.
+      </li>
+</ul>
+<div class="listing-no-matching d-none">
+No matching items
+</div>
+<nav id="confs-pagination" class="listing-pagination" aria-label="Page Navigation">
+  <ul class="pagination"></ul>
+</nav>
+</div>
+</section>
+<section id="journals" class="level3">
+<h3 class="anchored" data-anchor-id="journals">Journals</h3>
+<div id="listing-journals" class="quarto-listing quarto-listing-container-custom">
+<div class="listing-actions-group">
+   <div class="input-group input-group-sm quarto-listing-sort">
+     <span class="input-group-text"><i class="bi bi-sort-down"></i></span>
+     <select id="listing-journals-sort" class="form-select" aria-label="Order By" onchange="window['quarto-listings']['listing-journals'].sort(this.options[this.selectedIndex].value, { order: this.options[this.selectedIndex].getAttribute('data-direction')})">
+       <option value="" disabled="" selected="" hidden="">Order By</option>
+       <option value="index" data-direction="asc">Default</option>
+         <option value="listing-title" data-direction="asc">
+          Title
+        </option>
+         <option value="listing-year-sort" data-direction="asc">
+          year (Low to High)
+        </option>
+         <option value="listing-year-sort" data-direction="desc">
+          year (High to Low)
+        </option>
+         <option value="listing-venue" data-direction="asc">
+          venue
+        </option>
+     </select>
+  </div>
+    <div class="input-group input-group-sm quarto-listing-filter">
+      <span class="input-group-text"><i class="bi bi-search"></i></span>
+      <input type="text" class="search form-control" placeholder="Filter">
+    </div>
+</div>
+<ul class="list">
+      <li data-index="0" data-listing-year-sort="2016">
+        <a href="https://www.sciencedirect.com/science/article/pii/S0968090X1630184X" class="listing-title">Meeting points in ridesharing: A privacy-preserving approach</a>. 
+        <strong>Ulrich Aïvodji</strong>, Sébastien Gambs, Marie-José Huguet, Marc-Olivier Killijian. <span class="listing-venue">Transportation Research Part C: Emerging Technologies</span>, <span class="listing-year">2016</span>.
+      </li>
+      <li data-index="1" data-listing-year-sort="2022">
+        <a href="https://link.springer.com/article/10.1007/s10994-022-06191-y" class="listing-title">Improving Fairness Generalization Through a Sample-Robust Optimization Method</a>. 
+        Julien Ferry, <strong>Ulrich Aïvodji</strong>, Sébastien Gambs, Marie-José Huguet, Mohamed Siala. <span class="listing-venue">Machine learning</span>, <span class="listing-year">2022</span>.
+      </li>
+      <li data-index="2" data-listing-year-sort="2022">
+        <a href="https://ieeexplore.ieee.org/abstract/document/9854128/" class="listing-title">ML-based Performance Modeling in SDN-enabled Data Center Networks</a>. 
+        Benoit Nougnanke, Yann Labit, Marc Bruyere, <strong>Ulrich Aïvodji</strong>, Simone Ferlin. <span class="listing-venue">IEEE Transactions on Network and Service Management</span>, <span class="listing-year">2022</span>.
+      </li>
+      <li data-index="3" data-listing-year-sort="2021">
+        <a href="https://www.mdpi.com/1999-4893/14/3/87" class="listing-title">Local Data Debiasing for Fairness Based on Generative Adversarial Training</a>. 
+        <strong>Ulrich Aïvodji</strong>, François Bidet, Sébastien Gambs, Rosin C. Ngueveu, Alain Tapp. <span class="listing-venue">Algorithms</span>, <span class="listing-year">2021</span>.
+      </li>
+      <li data-index="4" data-listing-year-sort="2020">
+        <a href="http://www.tdp.cat/issues16/tdp.a363a19.pdf" class="listing-title">Privacy in trajectory micro-data publishing: a survey</a>. 
+        Marco Fiore, Panagiota Katsikouli, Elli Zavou, Mathieu Cunche, Françoise Fessant, Dominique Le Hello, <strong>Ulrich Aïvodji</strong>, Baptiste Olivier, Tony Quertier, Razvan Stanica. <span class="listing-venue">Transactions on Data Privacy</span>, <span class="listing-year">2020</span>.
+      </li>
+</ul>
+<div class="listing-no-matching d-none">
+No matching items
+</div>
+<nav id="journals-pagination" class="listing-pagination" aria-label="Page Navigation">
+  <ul class="pagination"></ul>
+</nav>
+</div>
+</section>
+<section id="workshops" class="level3">
+<h3 class="anchored" data-anchor-id="workshops">Workshops</h3>
+<div id="listing-workshops" class="quarto-listing quarto-listing-container-custom">
+<div class="listing-actions-group">
+   <div class="input-group input-group-sm quarto-listing-sort">
+     <span class="input-group-text"><i class="bi bi-sort-down"></i></span>
+     <select id="listing-workshops-sort" class="form-select" aria-label="Order By" onchange="window['quarto-listings']['listing-workshops'].sort(this.options[this.selectedIndex].value, { order: this.options[this.selectedIndex].getAttribute('data-direction')})">
+       <option value="" disabled="" selected="" hidden="">Order By</option>
+       <option value="index" data-direction="asc">Default</option>
+         <option value="listing-title" data-direction="asc">
+          Title
+        </option>
+         <option value="listing-year-sort" data-direction="asc">
+          year (Low to High)
+        </option>
+         <option value="listing-year-sort" data-direction="desc">
+          year (High to Low)
+        </option>
+         <option value="listing-venue" data-direction="asc">
+          venue
+        </option>
+     </select>
+  </div>
+    <div class="input-group input-group-sm quarto-listing-filter">
+      <span class="input-group-text"><i class="bi bi-search"></i></span>
+      <input type="text" class="search form-control" placeholder="Filter">
+    </div>
+</div>
+
+<ul class="list">
+      <li data-index="0" data-listing-year-sort="2015">
+        <a href="#" class="listing-title">Privacy-Preserving route synchronization for ridesharing</a>. 
+        <strong>Ulrich Aïvodji</strong>, Sébastien Gambs, Marie-José Huguet, Marc-Olivier Killijian. <span class="listing-venue">Atelier sur la Protection de la Vie Privée</span>, <span class="listing-year">2015</span>.
+      </li>
+      <li data-index="1" data-listing-year-sort="2015">
+        <a href="#" class="listing-title">Privacy-preserving carpooling</a>. 
+        <strong>Ulrich Aïvodji</strong>, Sébastien Gambs, Marie-José Huguet, Marc-Olivier Killijian. <span class="listing-venue">International Workshop on Freight Transportation and Logistics</span>, <span class="listing-year">2015</span>.
+      </li>
+      <li data-index="2" data-listing-year-sort="2016">
+        <a href="#" class="listing-title">Covoiturage respectueux de la vie privée</a>. 
+        <strong>Ulrich Aïvodji</strong>, Sébastien Gambs, Marie-José Huguet, Marc-Olivier Killijian. <span class="listing-venue">Congrès annuel de la Société Française de Recherche Opérationnelle et d'Aide à la Décision</span>, <span class="listing-year">2016</span>.
+      </li>
+      <li data-index="3" data-listing-year-sort="2017">
+        <a href="#" class="listing-title">Privacy-Preserving matching for ridesharing</a>. 
+        <strong>Ulrich Aïvodji</strong>, Kévin Huguenin, Marie-José Huguet, Marc-Olivier Killijian. <span class="listing-venue">Atelier sur la Protection de la Vie Privée</span>, <span class="listing-year">2017</span>.
+      </li>
+      <li data-index="4" data-listing-year-sort="2018">
+        <a href="#" class="listing-title">SRide: A Privacy-Preserving Ridesharing Method</a>. 
+        <strong>Ulrich Aïvodji</strong>, Marie-José Huguet, Marc-Olivier Killijian. <span class="listing-venue">Congrès annuel de la Société Française de Recherche Opérationnelle et d'Aide à la Décision</span>, <span class="listing-year">2018</span>.
+      </li>
+      <li data-index="5" data-listing-year-sort="2019">
+        <a href="https://ieeexplore.ieee.org/abstract/document/8844592/" class="listing-title">IOTFLA : A secured and privacy-preserving smart home architecture implementing federated learning</a>. 
+        <strong>Ulrich Aïvodji</strong>, Sébastien Gambs, Alexandre Martin. <span class="listing-venue">IEEE Symposium on Security and Privacy Workshops - SPW</span>, <span class="listing-year">2019</span>.
+      </li>
+      <li data-index="6" data-listing-year-sort="2020">
+        <a href="https://arxiv.org/abs/1909.11835" class="listing-title">GAMIN: An Adversarial Approach to Black-Box Model Inversion</a>. 
+        <strong>Ulrich Aïvodji</strong>, Sébastien Gambs, Timon Ther.. <span class="listing-venue">AAAI Workshop on Privacy-Preserving Artificial Intelligence</span>, <span class="listing-year">2020</span>.
+      </li>
+      <li data-index="7" data-listing-year-sort="2021">
+        <a href="#" class="listing-title">Optimisation Distributionnellement Robuste pour améliorer la généralisation de l'équité en apprentissage</a>. 
+        Julien Ferry, <strong>Ulrich Aïvodji</strong>, Sébastien Gambs, Marie-José Huguet, Mohamed Siala. <span class="listing-venue">Congrès annuel de la Société Française de Recherche Opérationnelle et d'Aide à la Décision</span>, <span class="listing-year">2021</span>.
+      </li>
+      <li data-index="8" data-listing-year-sort="2022">
+        <a href="#" class="listing-title">Concilier l'équité statistique et la précision en apprentissage machine interprétable grâce à la PLNE</a>. 
+        Julien Ferry, <strong>Ulrich Aïvodji</strong>, Sébastien Gambs, Marie-José Huguet, Mohamed Siala. <span class="listing-venue">Congrès annuel de la Société Française de Recherche Opérationnelle et d'Aide à la Décision</span>, <span class="listing-year">2022</span>.
+      </li>
+      <li data-index="9" data-listing-year-sort="2021">
+        <a href="#" class="listing-title">Améliorer la généralisation de l'équité en apprentissage grâce à l'Optimisation Distributionnellement Robuste.</a>. 
+        Julien Ferry, <strong>Ulrich Aïvodji</strong>, Sébastien Gambs, Marie-José Huguet, Mohamed Siala. <span class="listing-venue">Rencontres des Jeunes Chercheurs en Intelligence Artificielle</span>, <span class="listing-year">2021</span>.
+      </li>
+      <li data-index="10" data-listing-year-sort="2023">
+        <a href="#" class="listing-title">Exploiter l'équité d'un modèle d'apprentissage pour reconstruire les attributs sensibles de son ensemble d'entraînement</a>. 
+        Julien Ferry, <strong>Ulrich Aïvodji</strong>, Sébastien Gambs, Marie-José Huguet, Mohamed Siala. <span class="listing-venue">Rencontres des Jeunes Chercheurs en Intelligence Artificielle</span>, <span class="listing-year">2023</span>.
+      </li>
+</ul>
+<div class="listing-no-matching d-none">
+No matching items
+</div>
+<nav id="workshops-pagination" class="listing-pagination" aria-label="Page Navigation">
+  <ul class="pagination"></ul>
+</nav>
+</div>
+</section>
+<section id="preprints" class="level3">
+<h3 class="anchored" data-anchor-id="preprints">Preprints</h3>
+<div id="listing-preprints" class="quarto-listing quarto-listing-container-custom">
+<div class="listing-actions-group">
+   <div class="input-group input-group-sm quarto-listing-sort">
+     <span class="input-group-text"><i class="bi bi-sort-down"></i></span>
+     <select id="listing-preprints-sort" class="form-select" aria-label="Order By" onchange="window['quarto-listings']['listing-preprints'].sort(this.options[this.selectedIndex].value, { order: this.options[this.selectedIndex].getAttribute('data-direction')})">
+       <option value="" disabled="" selected="" hidden="">Order By</option>
+       <option value="index" data-direction="asc">Default</option>
+         <option value="listing-title" data-direction="asc">
+          Title
+        </option>
+         <option value="listing-year-sort" data-direction="asc">
+          year (Low to High)
+        </option>
+         <option value="listing-year-sort" data-direction="desc">
+          year (High to Low)
+        </option>
+     </select>
+  </div>
+    <div class="input-group input-group-sm quarto-listing-filter">
+      <span class="input-group-text"><i class="bi bi-search"></i></span>
+      <input type="text" class="search form-control" placeholder="Filter">
+    </div>
+</div>
+
+<ul class="list">
+      <li data-index="0" data-listing-year-sort="2023">
+        <a href="https://arxiv.org/abs/2308.15099" class="listing-title">Probabilistic Dataset Reconstruction from Interpretable Models</a>. 
+        Julien Ferry, <strong>Ulrich Aïvodji</strong>, Sébastien Gambs, Marie-José Huguet, Mohamed Siala. <span class="listing-venue"></span>, <span class="listing-year">2023</span>.
+      </li>
+      <li data-index="1" data-listing-year-sort="2023">
+        <a href="https://arxiv.org/abs/2307.13081" class="listing-title">Fairness Under Demographic Scarce Regime</a>. 
+        Patrik Joslin Kenfack, Samira Ebrahimi Kahou, <strong>Ulrich Aïvodji</strong>. <span class="listing-venue"></span>, <span class="listing-year">2023</span>.
+      </li>
+      <li data-index="2" data-listing-year-sort="2023">
+        <a href="https://arxiv.org/abs/2308.15099" class="listing-title">Learning Hybrid Interpretable Models: Theory, Taxonomy, and Methods</a>. 
+        Julien Ferry, Gabriel Laberge, <strong>Ulrich Aïvodji</strong>. <span class="listing-venue"></span>, <span class="listing-year">2023</span>.
+      </li>
+      <li data-index="3" data-listing-year-sort="2020">
+        <a href="https://arxiv.org/abs/2009.01884" class="listing-title">Model extraction from counterfactual explanations</a>. 
+        <strong>Ulrich Aïvodji</strong>, Alexandre Bolot, Sébastien Gambs. <span class="listing-venue"></span>, <span class="listing-year">2020</span>.
+      </li>
+      <li data-index="4" data-listing-year-sort="2019">
+        <a href="https://arxiv.org/abs/1909.03977" class="listing-title">Learning fair rule lists</a>. 
+        Julien Ferry, <strong>Ulrich Aïvodji</strong>, Sébastien Gambs, Marie-José Huguet, Mohamed Siala. <span class="listing-venue"></span>, <span class="listing-year">2019</span>.
+      </li>
+</ul>
+<div class="listing-no-matching d-none">
+No matching items
+</div>
+<nav id="preprints-pagination" class="listing-pagination" aria-label="Page Navigation">
+  <ul class="pagination"></ul>
+</nav>
+</div>
+
+
+
+</section>
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const disableStylesheet = (stylesheets) => {
+    for (let i=0; i < stylesheets.length; i++) {
+      const stylesheet = stylesheets[i];
+      stylesheet.rel = 'prefetch';
+    }
+  }
+  const enableStylesheet = (stylesheets) => {
+    for (let i=0; i < stylesheets.length; i++) {
+      const stylesheet = stylesheets[i];
+      stylesheet.rel = 'stylesheet';
+    }
+  }
+  const manageTransitions = (selector, allowTransitions) => {
+    const els = window.document.querySelectorAll(selector);
+    for (let i=0; i < els.length; i++) {
+      const el = els[i];
+      if (allowTransitions) {
+        el.classList.remove('notransition');
+      } else {
+        el.classList.add('notransition');
+      }
+    }
+  }
+  const toggleColorMode = (alternate) => {
+    // Switch the stylesheets
+    const alternateStylesheets = window.document.querySelectorAll('link.quarto-color-scheme.quarto-color-alternate');
+    manageTransitions('#quarto-margin-sidebar .nav-link', false);
+    if (alternate) {
+      enableStylesheet(alternateStylesheets);
+      for (const sheetNode of alternateStylesheets) {
+        if (sheetNode.id === "quarto-bootstrap") {
+          toggleBodyColorMode(sheetNode);
+        }
+      }
+    } else {
+      disableStylesheet(alternateStylesheets);
+      toggleBodyColorPrimary();
+    }
+    manageTransitions('#quarto-margin-sidebar .nav-link', true);
+    // Switch the toggles
+    const toggles = window.document.querySelectorAll('.quarto-color-scheme-toggle');
+    for (let i=0; i < toggles.length; i++) {
+      const toggle = toggles[i];
+      if (toggle) {
+        if (alternate) {
+          toggle.classList.add("alternate");     
+        } else {
+          toggle.classList.remove("alternate");
+        }
+      }
+    }
+    // Hack to workaround the fact that safari doesn't
+    // properly recolor the scrollbar when toggling (#1455)
+    if (navigator.userAgent.indexOf('Safari') > 0 && navigator.userAgent.indexOf('Chrome') == -1) {
+      manageTransitions("body", false);
+      window.scrollTo(0, 1);
+      setTimeout(() => {
+        window.scrollTo(0, 0);
+        manageTransitions("body", true);
+      }, 40);  
+    }
+  }
+  const isFileUrl = () => { 
+    return window.location.protocol === 'file:';
+  }
+  const hasAlternateSentinel = () => {  
+    let styleSentinel = getColorSchemeSentinel();
+    if (styleSentinel !== null) {
+      return styleSentinel === "alternate";
+    } else {
+      return false;
+    }
+  }
+  const setStyleSentinel = (alternate) => {
+    const value = alternate ? "alternate" : "default";
+    if (!isFileUrl()) {
+      window.localStorage.setItem("quarto-color-scheme", value);
+    } else {
+      localAlternateSentinel = value;
+    }
+  }
+  const getColorSchemeSentinel = () => {
+    if (!isFileUrl()) {
+      const storageValue = window.localStorage.getItem("quarto-color-scheme");
+      return storageValue != null ? storageValue : localAlternateSentinel;
+    } else {
+      return localAlternateSentinel;
+    }
+  }
+  let localAlternateSentinel = 'default';
+  // Dark / light mode switch
+  window.quartoToggleColorScheme = () => {
+    // Read the current dark / light value 
+    let toAlternate = !hasAlternateSentinel();
+    toggleColorMode(toAlternate);
+    setStyleSentinel(toAlternate);
+  };
+  // Ensure there is a toggle, if there isn't float one in the top right
+  if (window.document.querySelector('.quarto-color-scheme-toggle') === null) {
+    const a = window.document.createElement('a');
+    a.classList.add('top-right');
+    a.classList.add('quarto-color-scheme-toggle');
+    a.href = "";
+    a.onclick = function() { try { window.quartoToggleColorScheme(); } catch {} return false; };
+    const i = window.document.createElement("i");
+    i.classList.add('bi');
+    a.appendChild(i);
+    window.document.body.appendChild(a);
+  }
+  // Switch to dark mode if need be
+  if (hasAlternateSentinel()) {
+    toggleColorMode(true);
+  } else {
+    toggleColorMode(false);
+  }
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    text: function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  function tippyHover(el, contentFn) {
+    const config = {
+      allowHTML: true,
+      content: contentFn,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start'
+    };
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+</div> <!-- /content -->
+<footer class="footer">
+  <div class="nav-footer">
+    <div class="nav-footer-left">Made with <a href="https://quarto.org/">Quarto</a></div>   
+    <div class="nav-footer-center">
+      &nbsp;
+    </div>
+    <div class="nav-footer-right">
+      <ul class="footer-items list-unstyled">
+    <li class="nav-item compact">
+    <a class="nav-link" href="https://github.com/tisl-lab">
+      <i class="bi bi-github" role="img">
+</i> 
+    </a>
+  </li>  
+    <li class="nav-item compact">
+    <a class="nav-link" href="mailto:ulrich.aivodji@etsmtl.ca">
+      <i class="bi bi-envelope" role="img">
+</i> 
+    </a>
+  </li>  
+</ul>
+    </div>
+  </div>
+</footer>
+
+
+
+</body></html>
