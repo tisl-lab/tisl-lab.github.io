@@ -224,10 +224,11 @@ No matching items
 <h2 class="anchored" data-anchor-id="funding">💰 Funding</h2>
 <p>TISL is supported by the following organizations:</p>
 <ul>
-<li>École de technologie supérieure</li>
 <li>Compute Canada</li>
-<li>NSERC</li>
-<li>CIFAR</li>
+<li>Canadian Institute for Advanced Research (CIFAR)</li>
+<li>École de technologie supérieure (ÉTS)</li>
+<li>Fonds de recherche du Québec – Nature et technologies (FRQNT)</li>
+<li>Natural Sciences and Engineering Research Council of Canada (NSERC)</li>
 </ul>
 </section>
 <section id="alumni" class="level2">
@@ -591,6 +592,22 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       });
     }
   }
+    var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var filterRegex = new RegExp("https:\/\/tisl-lab\.github\.io");
+    var isInternal = (href) => {
+        return filterRegex.test(href) || localhostRegex.test(href);
+    }
+    // Inspect non-navigation links and adorn them if external
+ 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item)');
+    for (var i=0; i<links.length; i++) {
+      const link = links[i];
+      if (!isInternal(link.href)) {
+          // target, if specified
+          link.setAttribute("target", "_blank");
+          // default icon
+          link.classList.add("external");
+      }
+    }
 });
 </script>
 </div> <!-- /content -->

@@ -1,15 +1,12 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
-
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta charset="utf-8">
 <meta name="generator" content="quarto-1.3.306">
-
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
-
 <meta name="author" content="Ulrich Aïvodji">
 <meta name="dcterms.date" content="2021-03-29">
 <meta name="description" content="Using Python to learn fair rule lists with FairCORELS">
-
 <title>TISL - Learning fair rule lists with FairCORELS</title>
 <style>
 code{white-space: pre-wrap;}
@@ -78,7 +75,6 @@ div.csl-indent {
   margin-left: 2em;
 }</style>
 
-
 <script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
 <script src="../../site_libs/quarto-nav/headroom.min.js"></script>
 <script src="../../site_libs/clipboard/clipboard.min.js"></script>
@@ -96,8 +92,7 @@ div.csl-indent {
 <script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
 <link href="../../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
-<link href="../../site_libs/bootstrap/bootstrap-dark.min.css" rel="prefetch" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
-<script id="quarto-search-options" type="application/json">{
+<link href="../../site_libs/bootstrap/bootstrap-dark.min.css" rel="prefetch" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark"><script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
   "collapse-after": 3,
@@ -115,23 +110,13 @@ div.csl-indent {
     "search-detached-cancel-button-title": "Cancel",
     "search-submit-button-title": "Submit"
   }
-}</script>
-
-<script src="../../site_libs/kePrint-0.0.1/kePrint.js"></script>
-<link href="../../site_libs/lightable-0.0.1/lightable.css" rel="stylesheet">
-
-  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
-  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
-
-<link rel="stylesheet" href="../../css/styles.css">
+}</script><script src="../../site_libs/kePrint-0.0.1/kePrint.js"></script><link href="../../site_libs/lightable-0.0.1/lightable.css" rel="stylesheet">
+<script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script><script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script><link rel="stylesheet" href="../../css/styles.css">
 </head>
-
 <body class="nav-fixed">
 
 <div id="quarto-search-results"></div>
-  <header id="quarto-header" class="headroom fixed-top">
-    <nav class="navbar navbar-expand-lg navbar-dark ">
-      <div class="navbar-container container-fluid">
+  <header id="quarto-header" class="headroom fixed-top"><nav class="navbar navbar-expand-lg navbar-dark "><div class="navbar-container container-fluid">
       <div class="navbar-brand-container">
     <a class="navbar-brand" href="../../index.html">
     <span class="navbar-title">TISL</span>
@@ -143,7 +128,7 @@ div.csl-indent {
 </button>
           <div class="collapse navbar-collapse" id="navbarCollapse">
             <ul class="navbar-nav navbar-nav-scroll ms-auto">
-  <li class="nav-item">
+<li class="nav-item">
     <a class="nav-link" href="../../index.html" rel="" target=""><i class="bi bi-house" role="img">
 </i> 
  <span class="menu-text">Home</span></a>
@@ -159,45 +144,41 @@ div.csl-indent {
  <span class="menu-text">Blog</span></a>
   </li>  
 </ul>
-            <div class="quarto-navbar-tools">
+<div class="quarto-navbar-tools">
   <a href="" class="quarto-color-scheme-toggle quarto-navigation-tool  px-1" onclick="window.quartoToggleColorScheme(); return false;" title="Toggle dark mode"><i class="bi"></i></a>
 </div>
           </div> <!-- /navcollapse -->
       </div> <!-- /container-fluid -->
-    </nav>
-</header>
-<!-- content -->
-<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+    </nav></header><!-- content --><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
 <!-- sidebar -->
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
-        <nav id="TOC" role="doc-toc" class="toc-active">
-    <h2 id="toc-title">On this page</h2>
+        <nav id="TOC" role="doc-toc" class="toc-active"><h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#prerequisites" id="toc-prerequisites" class="nav-link active" data-scroll-target="#prerequisites">Prerequisites</a>
+<li>
+<a href="#prerequisites" id="toc-prerequisites" class="nav-link active" data-scroll-target="#prerequisites">Prerequisites</a>
   <ul class="collapse">
-  <li><a href="#group-fairness" id="toc-group-fairness" class="nav-link" data-scroll-target="#group-fairness">Group fairness</a></li>
+<li><a href="#group-fairness" id="toc-group-fairness" class="nav-link" data-scroll-target="#group-fairness">Group fairness</a></li>
   <li><a href="#rule-lists" id="toc-rule-lists" class="nav-link" data-scroll-target="#rule-lists">Rule lists</a></li>
   <li><a href="#corels" id="toc-corels" class="nav-link" data-scroll-target="#corels">CORELS</a></li>
   <li><a href="#faircorels" id="toc-faircorels" class="nav-link" data-scroll-target="#faircorels">FairCORELS</a></li>
-  </ul></li>
-  <li><a href="#learning-a-fair-rule-list" id="toc-learning-a-fair-rule-list" class="nav-link" data-scroll-target="#learning-a-fair-rule-list">Learning a fair rule list</a>
+  </ul>
+</li>
+  <li>
+<a href="#learning-a-fair-rule-list" id="toc-learning-a-fair-rule-list" class="nav-link" data-scroll-target="#learning-a-fair-rule-list">Learning a fair rule list</a>
   <ul class="collapse">
-  <li><a href="#installation" id="toc-installation" class="nav-link" data-scroll-target="#installation">Installation</a></li>
+<li><a href="#installation" id="toc-installation" class="nav-link" data-scroll-target="#installation">Installation</a></li>
   <li><a href="#dataset-and-preprocessing" id="toc-dataset-and-preprocessing" class="nav-link" data-scroll-target="#dataset-and-preprocessing">Dataset and Preprocessing</a></li>
   <li><a href="#training" id="toc-training" class="nav-link" data-scroll-target="#training">Training</a></li>
   <li><a href="#evaluation-of-the-rule-list" id="toc-evaluation-of-the-rule-list" class="nav-link" data-scroll-target="#evaluation-of-the-rule-list">Evaluation of the rule list</a></li>
-  </ul></li>
-  <li><a href="#conclusion" id="toc-conclusion" class="nav-link" data-scroll-target="#conclusion">Conclusion</a></li>
   </ul>
-</nav>
+</li>
+  <li><a href="#conclusion" id="toc-conclusion" class="nav-link" data-scroll-target="#conclusion">Conclusion</a></li>
+  </ul></nav>
     </div>
 <!-- main -->
-<main class="content page-columns page-full" id="quarto-document-content">
-
-<header id="title-block-header" class="quarto-title-block default">
-<div class="quarto-title">
+<main class="content page-columns page-full" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block default"><div class="quarto-title">
 <h1 class="title">Learning fair rule lists with FairCORELS</h1>
   <div class="quarto-categories">
     <div class="quarto-category">Python</div>
@@ -233,27 +214,21 @@ div.csl-indent {
   </div>
   
 
-</header>
-
-<p><a href="https://pypi.org/project/faircorels/">FairCORELS</a> is an open-source library for learning fair rule lists. In this short tutorial, we will learn how to use it to train rule lists under group fairness constraints.</p>
-<section id="prerequisites" class="level1 page-columns page-full">
-<h1>Prerequisites</h1>
-<section id="group-fairness" class="level2 page-columns page-full">
-<h2 class="anchored" data-anchor-id="group-fairness">Group fairness</h2>
+</header><p><a href="https://pypi.org/project/faircorels/">FairCORELS</a> is an open-source library for learning fair rule lists. In this short tutorial, we will learn how to use it to train rule lists under group fairness constraints.</p>
+<section id="prerequisites" class="level1 page-columns page-full"><h1>Prerequisites</h1>
+<section id="group-fairness" class="level2 page-columns page-full"><h2 class="anchored" data-anchor-id="group-fairness">Group fairness</h2>
 <p>Several notions of fairness have been proposed in the machine learning literature <span class="citation" data-cites="narayanan2018translation chouldechova2018frontiers">(<a href="#ref-narayanan2018translation" role="doc-biblioref">Narayanan 2018</a>; <a href="#ref-chouldechova2018frontiers" role="doc-biblioref">Chouldechova and Roth 2018</a>)</span>. This tutorial will focus on statistical notions of fairness <span class="citation" data-cites="verma2018fairness">(<a href="#ref-verma2018fairness" role="doc-biblioref">Verma and Rubin 2018</a>)</span>, also known as group fairness definitions. Simply put, statistical notions of fairness aim at studying how the performances of a machine learning model, as evaluated by a statistical measure <span class="math inline">\(m\)</span> (<em>e.g.,</em> false positive or false negative rates), differ depending on the group membership of individuals within a dataset. Group memberships are often determined by the values of particular attributes (<em>e.g.,</em> gender, age, ethnicity) hereafter referred to as <strong>sensitive attributes</strong>. In this context, the word <strong>unfairness</strong> is usually used to characterize the gap between the value of <span class="math inline">\(m\)</span> for a majority group (<em>e.g.,</em> historically advantaged individuals) and its value for a minority group (<em>e.g.,</em> historically disadvantaged individuals). <a href="#tbl-groupfairness">Table&nbsp;1</a> summarizes some of the most frequently used statistical notions of fairness.</p>
 <div class="cell page-columns page-full">
 <div class="cell-output-display page-columns page-full">
 <div id="tbl-groupfairness" class="anchored page-columns page-full">
 <table class="lightable-paper lightable-hover table table-sm table-striped small" data-quarto-postprocess="true">
 
-<thead>
-<tr class="header">
+<thead><tr class="header">
 <th style="text-align: left;" data-quarto-table-cell-role="th">name</th>
 <th style="text-align: left;" data-quarto-table-cell-role="th">measure</th>
 <th style="text-align: right;" data-quarto-table-cell-role="th">identifier</th>
 <th style="text-align: left;" data-quarto-table-cell-role="th">method</th>
-</tr>
-</thead>
+</tr></thead>
 <tbody>
 <tr class="odd">
 <td style="text-align: left;">statistical parity (SP)</td>
@@ -298,9 +273,7 @@ div.csl-indent {
 
 </div>
 </div>
-</section>
-<section id="rule-lists" class="level2">
-<h2 class="anchored" data-anchor-id="rule-lists">Rule lists</h2>
+</section><section id="rule-lists" class="level2"><h2 class="anchored" data-anchor-id="rule-lists">Rule lists</h2>
 <p>A rule list <span class="citation" data-cites="rivest1987learning angelino2018learning">(<a href="#ref-rivest1987learning" role="doc-biblioref">Rivest 1987</a>; <a href="#ref-angelino2018learning" role="doc-biblioref">Angelino et al. 2018</a>)</span> <span class="math inline">\(r= (d_p, \delta_p, q_0, K)\)</span> of length <span class="math inline">\(K \geq 0\)</span> is a <span class="math inline">\((K+1)-\)</span>tuple consisting of <span class="math inline">\(K\)</span> distinct association rules <span class="math inline">\(p_k \to q_k\)</span>, in which <span class="math inline">\(p_k \in d_p\)</span> is the antecedent of the association rule and <span class="math inline">\(q_k \in \delta_p\)</span> its corresponding consequent, followed by a default prediction <span class="math inline">\(q_0\)</span>. The rule list below predicts whether a person is likely to make at least 50k per year.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode haskell code-with-copy"><code class="sourceCode haskell"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a> <span class="kw">if</span> [capitalGain<span class="op">:&gt;=</span><span class="dv">5119</span>] <span class="kw">then</span> [high]</span>
@@ -311,13 +284,9 @@ div.csl-indent {
 <span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="kw">else</span> [low]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>To make a prediction using a rule list, the rules are applied sequentially until one rule applies, in which case the associated outcome is reported. If none of the rules applies, then the default prediction is reported.</p>
-</section>
-<section id="corels" class="level2">
-<h2 class="anchored" data-anchor-id="corels">CORELS</h2>
+</section><section id="corels" class="level2"><h2 class="anchored" data-anchor-id="corels">CORELS</h2>
 <p>CORELS <span class="citation" data-cites="angelino2018learning">(<a href="#ref-angelino2018learning" role="doc-biblioref">Angelino et al. 2018</a>)</span> is a supervised machine learning algorithm which takes as input a feature vector <span class="math inline">\(X\)</span> and its associated label vector <span class="math inline">\(Y\)</span>, all assumed to be binary, and finds the rule list <span class="math inline">\(r\)</span> that minimize the regularized empirical risk: <span class="math inline">\(\mathsf{misc(r, X, y)} + \lambda K\)</span>, where <span class="math inline">\(\mathsf{misc(r, X, y)}\)</span> is the misclassification error of the rule list and <span class="math inline">\(\lambda \geq 0\)</span> is a regularization parameter used to penalize longer rule lists. It represents the search space of the rule lists as a trie and uses an efficient branch-and-bound algorithm to prune it.</p>
-</section>
-<section id="faircorels" class="level2">
-<h2 class="anchored" data-anchor-id="faircorels">FairCORELS</h2>
+</section><section id="faircorels" class="level2"><h2 class="anchored" data-anchor-id="faircorels">FairCORELS</h2>
 <p>FairCORELS <span class="citation" data-cites="aivodji2019learning">(<a href="#ref-aivodji2019learning" role="doc-biblioref">Aïvodji et al. 2019</a>)</span> is a multi-objective formulation of CORELS that aims to learn fair rule lists. More precisely, FairCORELS solves the following optimization problem:</p>
 <p><span class="math display">\[\begin{eqnarray}
 \label{eq:faircorels}
@@ -326,25 +295,18 @@ div.csl-indent {
     \text{s.t. }   &amp; \texttt{unf}(r,X,y, A) \leq \epsilon, \\
 \end{eqnarray}\]</span></p>
 <p>where the objective function is the regularized empirical risk of CORELS and the constraint requires that the unfairness <span class="math inline">\(unf(r,X,y, A)\)</span> of the solution, for a particular sensitive attribute <span class="math inline">\(A\)</span>, to be less than a value <span class="math inline">\(\epsilon\)</span>.</p>
-</section>
-</section>
-<section id="learning-a-fair-rule-list" class="level1">
-<h1>Learning a fair rule list</h1>
+</section></section><section id="learning-a-fair-rule-list" class="level1"><h1>Learning a fair rule list</h1>
 <p>In this section, we will see how to use FairCORELS to learn a fair rule list.</p>
-<section id="installation" class="level2">
-<h2 class="anchored" data-anchor-id="installation">Installation</h2>
+<section id="installation" class="level2"><h2 class="anchored" data-anchor-id="installation">Installation</h2>
 <p>FairCORELS can be installed easily using <code>pip install faircorels</code>. Read the <a href="https://github.com/ferryjul/fairCORELS/blob/master/README.md">README</a> for more details on the installation process.</p>
-</section>
-<section id="dataset-and-preprocessing" class="level2">
-<h2 class="anchored" data-anchor-id="dataset-and-preprocessing">Dataset and Preprocessing</h2>
+</section><section id="dataset-and-preprocessing" class="level2"><h2 class="anchored" data-anchor-id="dataset-and-preprocessing">Dataset and Preprocessing</h2>
 <p>For this tutorial, we will use the <a href="https://archive.ics.uci.edu/ml/datasets/Adult">Adult Income</a> dataset. It contains demographic information of about <span class="math inline">\(48,842\)</span> individuals from the <span class="math inline">\(1994\)</span> U.S. census. The associated classification task consists of predicting whether a particular individual earns more than <span class="math inline">\(50,000\$\)</span> per year. <a href="#tbl-adultincome">Table&nbsp;2</a> shows the first six records of the dataset.</p>
 <div class="cell tbl-cap-location-top">
 <div class="cell-output-display">
 <div id="tbl-adultincome" class="anchored">
 <table class="lightable-paper lightable-hover table table-sm table-striped small" data-quarto-postprocess="true">
 <caption>Table&nbsp;2: First six rows of the Adult Income dataset.</caption>
-<thead>
-<tr class="header">
+<thead><tr class="header">
 <th style="text-align: right;" data-quarto-table-cell-role="th">age</th>
 <th style="text-align: left;" data-quarto-table-cell-role="th">workclass</th>
 <th style="text-align: right;" data-quarto-table-cell-role="th">fnlwgt</th>
@@ -360,8 +322,7 @@ div.csl-indent {
 <th style="text-align: right;" data-quarto-table-cell-role="th">hours_per_week</th>
 <th style="text-align: left;" data-quarto-table-cell-role="th">native_country</th>
 <th style="text-align: left;" data-quarto-table-cell-role="th">income</th>
-</tr>
-</thead>
+</tr></thead>
 <tbody>
 <tr class="odd">
 <td style="text-align: right;">25</td>
@@ -484,8 +445,7 @@ div.csl-indent {
 <div id="tbl-adultincomebin" class="anchored">
 <table class="lightable-paper lightable-hover table table-sm table-striped small" data-quarto-postprocess="true">
 <caption>Table&nbsp;3: First six rows of the binarized dataset.</caption>
-<thead>
-<tr class="header">
+<thead><tr class="header">
 <th style="text-align: right;" data-quarto-table-cell-role="th">workclass.fedGov</th>
 <th style="text-align: right;" data-quarto-table-cell-role="th">workclass.otherGov</th>
 <th style="text-align: right;" data-quarto-table-cell-role="th">workclass.private</th>
@@ -556,8 +516,7 @@ div.csl-indent {
 <th style="text-align: right;" data-quarto-table-cell-role="th">hours_per_week.49.5.61.5</th>
 <th style="text-align: right;" data-quarto-table-cell-role="th">hours_per_week..61.5</th>
 <th style="text-align: right;" data-quarto-table-cell-role="th">income</th>
-</tr>
-</thead>
+</tr></thead>
 <tbody>
 <tr class="odd">
 <td style="text-align: right;">0</td>
@@ -998,9 +957,7 @@ div.csl-indent {
 
 </div>
 </div>
-</section>
-<section id="training" class="level2">
-<h2 class="anchored" data-anchor-id="training">Training</h2>
+</section><section id="training" class="level2"><h2 class="anchored" data-anchor-id="training">Training</h2>
 <p>To train the constrained rule list, we will need the following libraries:</p>
 <ul>
 <li><p><strong>pandas</strong>: to load the dataset.</p></li>
@@ -1077,9 +1034,7 @@ div.csl-indent {
 <li><p><strong>policy</strong> and <strong>bfs_mode</strong>: are used to specify, the exploration strategy. That is, how nodes are ordered within the priority queue of the branch-and-bound framework. Here, we use a breadth-first search and nodes are selected according to the value of the objective function of the rule lists that they represent.</p></li>
 </ul>
 <p>The rule list is trained with the <strong>fit</strong> method.</p>
-</section>
-<section id="evaluation-of-the-rule-list" class="level2">
-<h2 class="anchored" data-anchor-id="evaluation-of-the-rule-list">Evaluation of the rule list</h2>
+</section><section id="evaluation-of-the-rule-list" class="level2"><h2 class="anchored" data-anchor-id="evaluation-of-the-rule-list">Evaluation of the rule list</h2>
 <p>To obtain the trained model’s description, we can use the <strong>rl_</strong> attribute of the rule list object.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(clf.rl_)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -1116,17 +1071,12 @@ div.csl-indent {
 </div>
 <p>To evaluate the unfairness, we first create a confusion matrix for both the minority and majority groups using the <strong>ConfusionMatrix</strong> class. Then, we create a metric object using <strong>Metric</strong>. Finally, we get the value of the unfairness using the corresponding method <em>equal_opportunity()</em>.</p>
 <p>In this particular example, we can see that the learned rule list effectively has an unfairness that is lower than <em>0.05</em> and an accuracy of <em>0.819</em> on the training set. It also generalizes well: it has an unfairness close to <em>0.00</em> and an accuracy of <em>0.816</em> on the test set.</p>
-</section>
-</section>
-<section id="conclusion" class="level1">
-<h1>Conclusion</h1>
+</section></section><section id="conclusion" class="level1"><h1>Conclusion</h1>
 <p>In this short tutorial, we learned how to train rule lists under group fairness constraints using FairCORELS. More details about FairCORELS can be found in our paper <strong>Learning Fair Rule Lists</strong> <span class="citation" data-cites="aivodji2019learning">(<a href="#ref-aivodji2019learning" role="doc-biblioref">Aïvodji et al. 2019</a>)</span>.</p>
 
 
 
-</section>
-
-<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" role="doc-bibliography"><h2 class="anchored quarto-appendix-heading">References</h2><div id="refs" class="references csl-bib-body hanging-indent" role="list">
+</section><div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" role="doc-bibliography"><h2 class="anchored quarto-appendix-heading">References</h2><div id="refs" class="references csl-bib-body hanging-indent" role="list">
 <div id="ref-aivodji2019learning" class="csl-entry" role="listitem">
 Aïvodji, Ulrich, Julien Ferry, Sébastien Gambs, Marie-José Huguet, and Mohamed Siala. 2019. <span>“Learning Fair Rule Lists.”</span> <em>arXiv Preprint arXiv:1909.03977</em>.
 </div>
@@ -1151,8 +1101,7 @@ Rivest, Ronald L. 1987. <span>“Learning Decision Lists.”</span> <em>Machine 
 <div id="ref-verma2018fairness" class="csl-entry" role="listitem">
 Verma, Sahil, and Julia Rubin. 2018. <span>“Fairness Definitions Explained.”</span> In <em>2018 Ieee/Acm International Workshop on Software Fairness (Fairware)</em>, 1–7. IEEE.
 </div>
-</div></section></div></main> <!-- /main -->
-<script id="quarto-html-after-body" type="application/javascript">
+</div></section></div></main><!-- /main --><script id="quarto-html-after-body" type="application/javascript">
 window.document.addEventListener("DOMContentLoaded", function (event) {
   const toggleBodyColorMode = (bsSheetEl) => {
     const mode = bsSheetEl.getAttribute("data-mode");
@@ -1498,18 +1447,33 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       });
     }
   }
+    var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var filterRegex = new RegExp("https:\/\/tisl-lab\.github\.io");
+    var isInternal = (href) => {
+        return filterRegex.test(href) || localhostRegex.test(href);
+    }
+    // Inspect non-navigation links and adorn them if external
+ 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item)');
+    for (var i=0; i<links.length; i++) {
+      const link = links[i];
+      if (!isInternal(link.href)) {
+          // target, if specified
+          link.setAttribute("target", "_blank");
+          // default icon
+          link.classList.add("external");
+      }
+    }
 });
 </script>
 </div> <!-- /content -->
-<footer class="footer">
-  <div class="nav-footer">
+<footer class="footer"><div class="nav-footer">
     <div class="nav-footer-left">Made with <a href="https://quarto.org/">Quarto</a></div>   
     <div class="nav-footer-center">
       &nbsp;
     </div>
     <div class="nav-footer-right">
       <ul class="footer-items list-unstyled">
-    <li class="nav-item compact">
+<li class="nav-item compact">
     <a class="nav-link" href="https://github.com/tisl-lab">
       <i class="bi bi-github" role="img">
 </i> 
@@ -1522,10 +1486,9 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     </a>
   </li>  
 </ul>
-    </div>
+</div>
   </div>
 </footer>
-
 
 
 </body></html>

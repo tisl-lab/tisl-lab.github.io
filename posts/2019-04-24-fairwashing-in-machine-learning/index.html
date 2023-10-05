@@ -1,15 +1,12 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
-
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta charset="utf-8">
 <meta name="generator" content="quarto-1.3.306">
-
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
-
 <meta name="author" content="Ulrich Aïvodji">
 <meta name="dcterms.date" content="2019-04-24">
 <meta name="description" content="Summary of a paper: Fairwashing – the risk of rationalization">
-
 <title>TISL - Fairwashing in machine learning</title>
 <style>
 code{white-space: pre-wrap;}
@@ -78,7 +75,6 @@ div.csl-indent {
   margin-left: 2em;
 }</style>
 
-
 <script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
 <script src="../../site_libs/quarto-nav/headroom.min.js"></script>
 <script src="../../site_libs/clipboard/clipboard.min.js"></script>
@@ -96,8 +92,7 @@ div.csl-indent {
 <script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
 <link href="../../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
-<link href="../../site_libs/bootstrap/bootstrap-dark.min.css" rel="prefetch" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
-<script id="quarto-search-options" type="application/json">{
+<link href="../../site_libs/bootstrap/bootstrap-dark.min.css" rel="prefetch" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark"><script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
   "collapse-after": 3,
@@ -115,20 +110,12 @@ div.csl-indent {
     "search-detached-cancel-button-title": "Cancel",
     "search-submit-button-title": "Submit"
   }
-}</script>
-
-  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
-  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
-
-<link rel="stylesheet" href="../../css/styles.css">
+}</script><script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script><script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script><link rel="stylesheet" href="../../css/styles.css">
 </head>
-
 <body class="nav-fixed">
 
 <div id="quarto-search-results"></div>
-  <header id="quarto-header" class="headroom fixed-top">
-    <nav class="navbar navbar-expand-lg navbar-dark ">
-      <div class="navbar-container container-fluid">
+  <header id="quarto-header" class="headroom fixed-top"><nav class="navbar navbar-expand-lg navbar-dark "><div class="navbar-container container-fluid">
       <div class="navbar-brand-container">
     <a class="navbar-brand" href="../../index.html">
     <span class="navbar-title">TISL</span>
@@ -140,7 +127,7 @@ div.csl-indent {
 </button>
           <div class="collapse navbar-collapse" id="navbarCollapse">
             <ul class="navbar-nav navbar-nav-scroll ms-auto">
-  <li class="nav-item">
+<li class="nav-item">
     <a class="nav-link" href="../../index.html" rel="" target=""><i class="bi bi-house" role="img">
 </i> 
  <span class="menu-text">Home</span></a>
@@ -156,49 +143,47 @@ div.csl-indent {
  <span class="menu-text">Blog</span></a>
   </li>  
 </ul>
-            <div class="quarto-navbar-tools">
+<div class="quarto-navbar-tools">
   <a href="" class="quarto-color-scheme-toggle quarto-navigation-tool  px-1" onclick="window.quartoToggleColorScheme(); return false;" title="Toggle dark mode"><i class="bi"></i></a>
 </div>
           </div> <!-- /navcollapse -->
       </div> <!-- /container-fluid -->
-    </nav>
-</header>
-<!-- content -->
-<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+    </nav></header><!-- content --><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
 <!-- sidebar -->
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
-        <nav id="TOC" role="doc-toc" class="toc-active">
-    <h2 id="toc-title">On this page</h2>
+        <nav id="TOC" role="doc-toc" class="toc-active"><h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#prerequisites" id="toc-prerequisites" class="nav-link active" data-scroll-target="#prerequisites">Prerequisites 🚲</a>
+<li>
+<a href="#prerequisites" id="toc-prerequisites" class="nav-link active" data-scroll-target="#prerequisites">Prerequisites 🚲</a>
   <ul class="collapse">
-  <li><a href="#fairness" id="toc-fairness" class="nav-link" data-scroll-target="#fairness">Fairness ⚖️</a></li>
+<li><a href="#fairness" id="toc-fairness" class="nav-link" data-scroll-target="#fairness">Fairness ⚖️</a></li>
   <li><a href="#black-box-explanation" id="toc-black-box-explanation" class="nav-link" data-scroll-target="#black-box-explanation">Black-box explanation</a></li>
   <li><a href="#rule-lists" id="toc-rule-lists" class="nav-link" data-scroll-target="#rule-lists">Rule lists 🗒️</a></li>
   <li><a href="#corels" id="toc-corels" class="nav-link" data-scroll-target="#corels">CORELS</a></li>
   <li><a href="#model-enumeration" id="toc-model-enumeration" class="nav-link" data-scroll-target="#model-enumeration">Model enumeration</a></li>
-  </ul></li>
-  <li><a href="#rationalization" id="toc-rationalization" class="nav-link" data-scroll-target="#rationalization">Rationalization</a>
-  <ul class="collapse">
-  <li><a href="#problem-formulation" id="toc-problem-formulation" class="nav-link" data-scroll-target="#problem-formulation">Problem formulation</a></li>
-  <li><a href="#laundryml" id="toc-laundryml" class="nav-link" data-scroll-target="#laundryml">LaundryML</a></li>
-  </ul></li>
-  <li><a href="#experiments" id="toc-experiments" class="nav-link" data-scroll-target="#experiments">Experiments</a>
-  <ul class="collapse">
-  <li><a href="#results-for-model-rationalization" id="toc-results-for-model-rationalization" class="nav-link" data-scroll-target="#results-for-model-rationalization">Results for model rationalization</a></li>
-  <li><a href="#results-for-outcome-rationalization" id="toc-results-for-outcome-rationalization" class="nav-link" data-scroll-target="#results-for-outcome-rationalization">Results for outcome rationalization</a></li>
-  </ul></li>
-  <li><a href="#conclusion" id="toc-conclusion" class="nav-link" data-scroll-target="#conclusion">Conclusion</a></li>
   </ul>
-</nav>
+</li>
+  <li>
+<a href="#rationalization" id="toc-rationalization" class="nav-link" data-scroll-target="#rationalization">Rationalization</a>
+  <ul class="collapse">
+<li><a href="#problem-formulation" id="toc-problem-formulation" class="nav-link" data-scroll-target="#problem-formulation">Problem formulation</a></li>
+  <li><a href="#laundryml" id="toc-laundryml" class="nav-link" data-scroll-target="#laundryml">LaundryML</a></li>
+  </ul>
+</li>
+  <li>
+<a href="#experiments" id="toc-experiments" class="nav-link" data-scroll-target="#experiments">Experiments</a>
+  <ul class="collapse">
+<li><a href="#results-for-model-rationalization" id="toc-results-for-model-rationalization" class="nav-link" data-scroll-target="#results-for-model-rationalization">Results for model rationalization</a></li>
+  <li><a href="#results-for-outcome-rationalization" id="toc-results-for-outcome-rationalization" class="nav-link" data-scroll-target="#results-for-outcome-rationalization">Results for outcome rationalization</a></li>
+  </ul>
+</li>
+  <li><a href="#conclusion" id="toc-conclusion" class="nav-link" data-scroll-target="#conclusion">Conclusion</a></li>
+  </ul></nav>
     </div>
 <!-- main -->
-<main class="content" id="quarto-document-content">
-
-<header id="title-block-header" class="quarto-title-block default">
-<div class="quarto-title">
+<main class="content" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block default"><div class="quarto-title">
 <h1 class="title">Fairwashing in machine learning</h1>
   <div class="quarto-categories">
     <div class="quarto-category">Explainability</div>
@@ -234,33 +219,24 @@ div.csl-indent {
   </div>
   
 
-</header>
-
-<p>Machine learning is now used in every aspect of our life, from entertainment to high stakes decision-making processes such as credit scoring, medical diagnosis, or predictive justice. The potential risk of incorrect decisions has raised the public demand for an explanation of the decisions of machine learning models. In addition to this public demand, all across the world, several communities and government initiatives are emerging, asking for more transparency in machine learning models’ decisions, and the development of an ethically-aligned AI. As an example, in Europe, the new General Data Protection Regulation has a provision requiring explanations for the decisions of machine learning models that have a significant impact on individuals <span class="citation" data-cites="goodman2016european">(<a href="#ref-goodman2016european" role="doc-biblioref">Goodman and Flaxman 2017</a>)</span>.</p>
+</header><p>Machine learning is now used in every aspect of our life, from entertainment to high stakes decision-making processes such as credit scoring, medical diagnosis, or predictive justice. The potential risk of incorrect decisions has raised the public demand for an explanation of the decisions of machine learning models. In addition to this public demand, all across the world, several communities and government initiatives are emerging, asking for more transparency in machine learning models’ decisions, and the development of an ethically-aligned AI. As an example, in Europe, the new General Data Protection Regulation has a provision requiring explanations for the decisions of machine learning models that have a significant impact on individuals <span class="citation" data-cites="goodman2016european">(<a href="#ref-goodman2016european" role="doc-biblioref">Goodman and Flaxman 2017</a>)</span>.</p>
 <p>We believe that because of this particular combination of regulations and public demand for ethically-aligned development of AI, a dishonest machine learning models’ producers may be tempted to perform fairwashing. We define fairwashing as promoting the false perception that a machine learning model complies with a given ethical requirement while it might not be so. The risk of fairwashing is all the more possible because the right to explanation as defined in current regulations does not give precise directives on what it means to provide a ‘’valid explanation’’ <span class="citation" data-cites="wachter2017right edwards2017slave">(<a href="#ref-wachter2017right" role="doc-biblioref">Wachter, Mittelstadt, and Floridi 2017</a>; <a href="#ref-edwards2017slave" role="doc-biblioref">Edwards and Veale 2017</a>)</span>, leaving a legal loophole that can be exploited by a dishonest model’s producer to cover up a possible misconducts of its black-box model by providing misleading explanations.</p>
 <p>To demonstrate this risk, we consider two variations of the black-box explanation problem and show that one can forge misleading explanations that comply with a given ethical requirement. In particular, we use fairness as the ethical requirement and demonstrate that given a black-box model that is unfair, one can systematically deduce rule lists with high fidelity to the black-box model while being considerably less unfair at the same time.</p>
-<section id="prerequisites" class="level1">
-<h1>Prerequisites 🚲</h1>
-<section id="fairness" class="level2">
-<h2 class="anchored" data-anchor-id="fairness">Fairness ⚖️</h2>
+<section id="prerequisites" class="level1"><h1>Prerequisites 🚲</h1>
+<section id="fairness" class="level2"><h2 class="anchored" data-anchor-id="fairness">Fairness ⚖️</h2>
 <p>There are several definitions for fairness in machine learning <span class="citation" data-cites="verma2018fairness">(<a href="#ref-verma2018fairness" role="doc-biblioref">Verma and Rubin 2018</a>)</span>. Central to all these definitions is the notion of the sensitive attribute <span class="math inline">\(s\)</span> for which non-discrimination should be established. An example of such attribute can be the gender, ethnicity, or religion. For this work, we use demographic parity <span class="citation" data-cites="calders2009building">(<a href="#ref-calders2009building" role="doc-biblioref">Calders, Kamiran, and Pechenizkiy 2009</a>)</span> as fairness metric. Demographic parity requires the prediction <span class="math inline">\(\hat{y}\)</span> of the black-box model to be independent of the sensitive attribute <span class="math inline">\(s\)</span>, that is, <span class="math inline">\(P(\hat{y}=1 | s= 1) = P(\hat{y}=1 | s= 0)\)</span>. We therefore define unfairness as <span class="math inline">\(\mathsf{unfairness}=|P(\hat{y}=1 | s= 1) - P(\hat{y}=1 | s= 0)|\)</span>.</p>
-</section>
-<section id="black-box-explanation" class="level2">
-<h2 class="anchored" data-anchor-id="black-box-explanation">Black-box explanation</h2>
+</section><section id="black-box-explanation" class="level2"><h2 class="anchored" data-anchor-id="black-box-explanation">Black-box explanation</h2>
 <p>Black-box explanation is the problem of explaining how a machine learning model – whose internal logic is hidden to the auditor and generally complex – produces its outcomes. An explanation can be viewed as an interface between humans and a decision process that is both an accurate proxy of the decision process and understandable by humans <span class="citation" data-cites="guidotti2018survey">(<a href="#ref-guidotti2018survey" role="doc-biblioref">Guidotti et al. 2018</a>)</span>. Figure @ref(fig:pipeline) shows an example of a black-box explanation pipeline. First, a black-box model <span class="math inline">\(M_b\)</span> is obtained using a particular learning algorithm (e.g., random forest, SVM, neural network…) on a particular dataset <span class="math inline">\(D_{train}\)</span>. Then, the black-box model is used to label another dataset <span class="math inline">\(D_{labeled} \neq D_{train}\)</span>. Finally, an explanation algorithm takes as input <span class="math inline">\(D_{labeled}\)</span> and produces an interpretable model <span class="math inline">\(M_i\)</span>. Examples of interfaces accepted in the literature as interpretable models include linear models, decision trees, rule lists, and rule sets. In this work, we use rule lists as explanation models. We consider two variations of the black-box explanation problem, namely model explanation and outcome explanation. The former consists in providing an explanation model that explains all the decisions of the black-box model, while the latter consists of producing an explanation model that explains a particular decision of the black-box model. To assess the performance of an explanation algorithm, we rely on the notion of fidelity <span class="citation" data-cites="craven1996extracting">(<a href="#ref-craven1996extracting" role="doc-biblioref">Craven and Shavlik 1996</a>)</span>, which is the accuracy of the explanation model <span class="math inline">\(M_i\)</span> relative to the black-box model <span class="math inline">\(M_b\)</span> on some instances <span class="math inline">\(X\)</span>. Simply put, <span class="math inline">\(\mathsf{fidelity} = \frac{1}{|X|} \sum_{x \in X} \mathbb{I}(M_i(x)=M_b(x))\)</span>.</p>
 <div class="cell" data-layout-align="center">
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><img src="explanation.png" class="img-fluid figure-img" width="340"></p>
+<figure class="figure"><p><img src="explanation.png" class="img-fluid figure-img" width="340"></p>
 <p></p><figcaption class="figure-caption">Black-box explanation pipeline</figcaption><p></p>
 </figure>
 </div>
 </div>
 </div>
-</section>
-<section id="rule-lists" class="level2">
-<h2 class="anchored" data-anchor-id="rule-lists">Rule lists 🗒️</h2>
+</section><section id="rule-lists" class="level2"><h2 class="anchored" data-anchor-id="rule-lists">Rule lists 🗒️</h2>
 <p>A rule list <span class="citation" data-cites="rivest1987learning">(<a href="#ref-rivest1987learning" role="doc-biblioref">Rivest 1987</a>)</span> <span class="math inline">\(r= (d_p, \delta_p, q_0, K)\)</span> of length <span class="math inline">\(K \geq 0\)</span> is a <span class="math inline">\((K+1)-\)</span>tuple consisting of <span class="math inline">\(K\)</span> distinct association rules <span class="math inline">\(p_k \to q_k\)</span>, in which <span class="math inline">\(p_k \in d_p\)</span> is the antecedent of the association rule and <span class="math inline">\(q_k \in \delta_p\)</span> its corresponding consequent, followed by a default prediction <span class="math inline">\(q_0\)</span>. The rule list below predicts whether a person is likely to make at least 50k per year.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode haskell code-with-copy"><code class="sourceCode haskell"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a> <span class="kw">if</span> [capitalGain<span class="op">:&gt;=</span><span class="dv">5119</span>] <span class="kw">then</span> [high]</span>
@@ -271,40 +247,25 @@ div.csl-indent {
 <span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="kw">else</span> [low]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>To make a prediction using a rule list, the rules are applied sequentially until one rule applies, in which case the associated outcome is reported. If none of the rules applies, then the default prediction is reported.</p>
-</section>
-<section id="corels" class="level2">
-<h2 class="anchored" data-anchor-id="corels">CORELS</h2>
+</section><section id="corels" class="level2"><h2 class="anchored" data-anchor-id="corels">CORELS</h2>
 <p>CORELS <span class="citation" data-cites="angelino2018learning">(<a href="#ref-angelino2018learning" role="doc-biblioref">Angelino et al. 2018</a>)</span> is a supervised machine learning algorithm which takes as input a feature vector <span class="math inline">\(X\)</span> and it associated label vector <span class="math inline">\(Y\)</span>, all assumed to be binary, and finds the rule list <span class="math inline">\(r\)</span> that minimize the regularized empirical risk: <span class="math inline">\(\mathsf{misc(r, X, Y)} + \lambda K\)</span>, where <span class="math inline">\(\mathsf{misc(r, X, Y)}\)</span> is the misclassification error of the rule list and <span class="math inline">\(\lambda \geq 0\)</span> is a regularization parameter used to penalize longer rule lists. It represents the search space of the rule lists as a trie and uses an efficient branch-and-bound algorithm to prune it.</p>
-</section>
-<section id="model-enumeration" class="level2">
-<h2 class="anchored" data-anchor-id="model-enumeration">Model enumeration</h2>
+</section><section id="model-enumeration" class="level2"><h2 class="anchored" data-anchor-id="model-enumeration">Model enumeration</h2>
 <p>In this work, we use a rule list enumeration technique introduced in <span class="citation" data-cites="hara2018approximate">(<a href="#ref-hara2018approximate" role="doc-biblioref">Hara and Ishihata 2018</a>)</span>. This algorithm takes as input the set <span class="math inline">\(T\)</span> of all binary predictors, and enumerate rule list models in the descending order of their objective function. It maintains a heap <span class="math inline">\(\mathcal{H}\)</span>, whose priority is the objective function value of the rule lists and a list <span class="math inline">\(\mathcal{M}\)</span> for the enumerated models. First, it starts by computing the optimal rule <span class="math inline">\(m=\mathsf{CORELS}(T) = (d_p, \delta_p, q_0, K)\)</span> for <span class="math inline">\(T\)</span> using the CORELS algorithm. Then, it inserts the tuple <span class="math inline">\((m, T, \emptyset)\)</span> into the heap. Finally, the algorithm repeats the following three steps until the stopping criterion is met: * Extract the tuple <span class="math inline">\((m, S, F)\)</span> with the maximum priority value from <span class="math inline">\(\mathcal{H}\)</span>. * Output <span class="math inline">\(m\)</span> as the <span class="math inline">\(i-\)</span>th model if <span class="math inline">\(m \notin \mathcal{M}\)</span>. * Branch the search space: compute and insert <span class="math inline">\(m' =\mathsf{CORELS}(S \setminus \{t_j\})\)</span> into <span class="math inline">\(\mathcal{H}\)</span> for all <span class="math inline">\(t_j \in \delta_p\)</span>.</p>
-</section>
-</section>
-<section id="rationalization" class="level1">
-<h1>Rationalization</h1>
-<section id="problem-formulation" class="level2">
-<h2 class="anchored" data-anchor-id="problem-formulation">Problem formulation</h2>
+</section></section><section id="rationalization" class="level1"><h1>Rationalization</h1>
+<section id="problem-formulation" class="level2"><h2 class="anchored" data-anchor-id="problem-formulation">Problem formulation</h2>
 <p>We define rationalization as the problem of finding an interpretable surrogate model <span class="math inline">\(M_i\)</span> approximating a black-box model <span class="math inline">\(M_b\)</span>, such that <span class="math inline">\(M_i\)</span> is fairer than <span class="math inline">\(M_b\)</span>. In particular, we distinguish model rationalization and outcome rationalization.</p>
 <p>Given a black-box model <span class="math inline">\(M_b\)</span>, a set of instances <span class="math inline">\(X\)</span> and a sensitive attribute <span class="math inline">\(s\)</span>, the model rationalization problem consists in finding an intrepretable global model <span class="math inline">\(M_i^g\)</span> such that <span class="math inline">\(\epsilon(M_i^g, X, s) &gt; \epsilon(M_b, X, s)\)</span>, for some fairness evaluation metric <span class="math inline">\(\epsilon(\cdot, \cdot, \cdot)\)</span>. The outcome rationalization problem is similar to the model rationalaization problem, but consider only a single data point, and provide an explanation for this particular data point and its neighborhood. More precisely, given a black-box model <span class="math inline">\(M_b\)</span>, an instance <span class="math inline">\(x\)</span>, a neighborhood <span class="math inline">\(\mathcal{V}(x)\)</span> of <span class="math inline">\(x\)</span>, and a sensitive attribute <span class="math inline">\(s\)</span>, the outcome rationalization problem consists in finding an intrepretable local model <span class="math inline">\(M_i^l\)</span> such that <span class="math inline">\(\epsilon(M_i^l, \mathcal{V}(x), s) &gt; \epsilon(M_b, \mathcal{V}(x), s)\)</span>, for some fairness evaluation metric <span class="math inline">\(\epsilon(\cdot, \cdot, \cdot)\)</span>.</p>
-</section>
-<section id="laundryml" class="level2">
-<h2 class="anchored" data-anchor-id="laundryml">LaundryML</h2>
+</section><section id="laundryml" class="level2"><h2 class="anchored" data-anchor-id="laundryml">LaundryML</h2>
 <p>We propose LaundryML, an algorithm to solve the rationalization problem efficiently. First, LaundryML uses a modified version of CORELS in which we define the new objective function as <span class="math inline">\(\mathsf{(1-\beta) misc(\cdot)} + \mathsf{\beta unfairness(\cdot)}+ \lambda K\)</span>, where <span class="math inline">\(\mathsf{misc(\cdot)}\)</span> is the misclassification error of the rule list, <span class="math inline">\(\mathsf{unfairness(\cdot)}\)</span> returns the unfairness of the rule list, <span class="math inline">\(\lambda \geq 0\)</span> is a regularization parameter used to penalize longer rule lists, and <span class="math inline">\(\beta \geq 0\)</span> is the weight of the unfairness regularization. Then, it uses the customized CORELS algorithm to enumerated rule list models. Finally, it uses a threshold for the unfairness to select the models that can be used for rationalization.</p>
 <p>To solve the model rationalization problem for a set <span class="math inline">\(X\)</span> of instances, LaundryML will take as input the tuple <span class="math inline">\(T=\{X, y\}\)</span> formed the instances <span class="math inline">\(X\)</span> and the predictions <span class="math inline">\(y\)</span> of the black-box model on <span class="math inline">\(X\)</span>. To solve the outcome rationalization for a particular instance <span class="math inline">\(x\)</span>, the inputs of LaundryML will be the instances <span class="math inline">\(T_x = \mathsf{neigh(x, T)}\)</span>, some neighborhood searching algorithm <span class="math inline">\(\mathsf{neigh(\cdot)}\)</span>.</p>
-</section>
-</section>
-<section id="experiments" class="level1">
-<h1>Experiments</h1>
+</section></section><section id="experiments" class="level1"><h1>Experiments</h1>
 <p>We train a Random Forest model on Adult Income dataset to mimic the black-box model. Our black-box model achieves respectively an accuracy of <span class="math inline">\(84.31\%\)</span>, a precision of <span class="math inline">\(79.78\%\)</span>, and an unfairness of <span class="math inline">\(0.13\)</span> on a set of instances we use to mimic a suing group (that accuses the black-box model on being unfair).</p>
-<section id="results-for-model-rationalization" class="level2">
-<h2 class="anchored" data-anchor-id="results-for-model-rationalization">Results for model rationalization</h2>
+<section id="results-for-model-rationalization" class="level2"><h2 class="anchored" data-anchor-id="results-for-model-rationalization">Results for model rationalization</h2>
 <p>We perform fairwashaing through model rationalization by explaining the decisions of the black-box model with an interpretable model (here a rule list) that is less unfair than the black-box while having a fidelity greater than <span class="math inline">\(90\%\)</span>. For the model rationalization experiment, we set <span class="math inline">\(\lambda=0.005\)</span>, and <span class="math inline">\(\beta =\{0, 0.1, 0.2, 0.5, 0.7, 0.9\}\)</span>, and we enumerate 50 models.</p>
 <div class="cell" data-layout-align="center">
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><img src="fairwashing_global.png" class="img-fluid figure-img" width="881"></p>
+<figure class="figure"><p><img src="fairwashing_global.png" class="img-fluid figure-img" width="881"></p>
 <p></p><figcaption class="figure-caption">CDFs of the unfairness (left) and the fidelity (right) of rationalized explanation models produced by LaundryML on the suing group of Adult Income. Results are for the demographic parity metric and the random forest black-box model. The vertical line on the left figure represents the unfairness of the black-box model. The CDFs on the right figure are the CDFs of the fidelity of explanation models that are fairer than the black box model.</figcaption><p></p>
 </figure>
 </div>
@@ -314,22 +275,18 @@ div.csl-indent {
 <div class="cell" data-layout-align="center">
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><img src="audit.png" class="img-fluid figure-img" width="1406"></p>
+<figure class="figure"><p><img src="audit.png" class="img-fluid figure-img" width="1406"></p>
 <p></p><figcaption class="figure-caption">Relative feature dependence ranking obtained using FairML to audit models trained on the Adult Income dataset. Green indicates that the feature highly contributes to a high salary rating on Adult. Features that characterize the majority groups are highlighted in yellow. Black-box model (left) vs.&nbsp;LaundryML model (middle) and its description (right).</figcaption><p></p>
 </figure>
 </div>
 </div>
 </div>
-</section>
-<section id="results-for-outcome-rationalization" class="level2">
-<h2 class="anchored" data-anchor-id="results-for-outcome-rationalization">Results for outcome rationalization</h2>
+</section><section id="results-for-outcome-rationalization" class="level2"><h2 class="anchored" data-anchor-id="results-for-outcome-rationalization">Results for outcome rationalization</h2>
 <p>We perform fairwhasing trough outcome rationalization by explaining each rejected female subject with a rule list whose unfairness (as measured on the neighbourhood of the subject) is lower than that of the black-box model. For the outcome rationalization experiment, we set <span class="math inline">\(\lambda=0.005\)</span>, and <span class="math inline">\(\beta =\{0.1, 0.3, 0.5, 0.7, 0.9\}\)</span>, and for each rejected female subjects, we enumerate 50 models to perform outcome rationalization.</p>
 <div class="cell" data-layout-align="center">
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><img src="local_adult.png" class="img-fluid figure-img" width="675"></p>
+<figure class="figure"><p><img src="local_adult.png" class="img-fluid figure-img" width="675"></p>
 <p></p><figcaption class="figure-caption">CDFs of the unfairness of the best model found by LaundryML per user on Adult Income</figcaption><p></p>
 </figure>
 </div>
@@ -337,17 +294,12 @@ div.csl-indent {
 </div>
 <p>Results in Figure @ref(fig:local) show that as the fairness regulation parameter <span class="math inline">\(\beta\)</span> increases, the unfairness of the explanation model decreases. In particular, with <span class="math inline">\(\beta=0.9\)</span>, a completely fair model (unfairness = <span class="math inline">\(0.0\)</span>) was found to explain the outcome for each rejected female subject in Adult Income.</p>
 <p>Results on ProPublica Recidivism dataset, as well as experiments using other black-box models and fairness metrics, are discussed in our paper <span class="citation" data-cites="aivodji2019fairwashing">(<a href="#ref-aivodji2019fairwashing" role="doc-biblioref">Aïvodji et al. 2019</a>)</span>.</p>
-</section>
-</section>
-<section id="conclusion" class="level1">
-<h1>Conclusion</h1>
+</section></section><section id="conclusion" class="level1"><h1>Conclusion</h1>
 <p>This work introduces the risk of fairwashing associated with black-box explanation in machine learning. We hope our work will raise the awareness of the machine learning community and inspire future research towards the ethical issues raised by the possibility of rationalizing.</p>
 
 
 
-</section>
-
-<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" role="doc-bibliography"><h2 class="anchored quarto-appendix-heading">References</h2><div id="refs" class="references csl-bib-body hanging-indent" role="list">
+</section><div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" role="doc-bibliography"><h2 class="anchored quarto-appendix-heading">References</h2><div id="refs" class="references csl-bib-body hanging-indent" role="list">
 <div id="ref-aivodji2019fairwashing" class="csl-entry" role="listitem">
 Aïvodji, Ulrich, Hiromi Arai, Olivier Fortineau, Sébastien Gambs, Satoshi Hara, and Alain Tapp. 2019. <span>“Fairwashing: The Risk of Rationalization.”</span> In <em>International Conference on Machine Learning</em>, 161–70. PMLR.
 </div>
@@ -381,8 +333,7 @@ Verma, Sahil, and Julia Rubin. 2018. <span>“Fairness Definitions Explained.”
 <div id="ref-wachter2017right" class="csl-entry" role="listitem">
 Wachter, Sandra, Brent Mittelstadt, and Luciano Floridi. 2017. <span>“Why a Right to Explanation of Automated Decision-Making Does Not Exist in the General Data Protection Regulation.”</span> <em>International Data Privacy Law</em> 7 (2): 76–99.
 </div>
-</div></section></div></main> <!-- /main -->
-<script id="quarto-html-after-body" type="application/javascript">
+</div></section></div></main><!-- /main --><script id="quarto-html-after-body" type="application/javascript">
 window.document.addEventListener("DOMContentLoaded", function (event) {
   const toggleBodyColorMode = (bsSheetEl) => {
     const mode = bsSheetEl.getAttribute("data-mode");
@@ -728,18 +679,33 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       });
     }
   }
+    var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var filterRegex = new RegExp("https:\/\/tisl-lab\.github\.io");
+    var isInternal = (href) => {
+        return filterRegex.test(href) || localhostRegex.test(href);
+    }
+    // Inspect non-navigation links and adorn them if external
+ 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item)');
+    for (var i=0; i<links.length; i++) {
+      const link = links[i];
+      if (!isInternal(link.href)) {
+          // target, if specified
+          link.setAttribute("target", "_blank");
+          // default icon
+          link.classList.add("external");
+      }
+    }
 });
 </script>
 </div> <!-- /content -->
-<footer class="footer">
-  <div class="nav-footer">
+<footer class="footer"><div class="nav-footer">
     <div class="nav-footer-left">Made with <a href="https://quarto.org/">Quarto</a></div>   
     <div class="nav-footer-center">
       &nbsp;
     </div>
     <div class="nav-footer-right">
       <ul class="footer-items list-unstyled">
-    <li class="nav-item compact">
+<li class="nav-item compact">
     <a class="nav-link" href="https://github.com/tisl-lab">
       <i class="bi bi-github" role="img">
 </i> 
@@ -752,10 +718,9 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     </a>
   </li>  
 </ul>
-    </div>
+</div>
   </div>
 </footer>
-
 
 
 </body></html>
